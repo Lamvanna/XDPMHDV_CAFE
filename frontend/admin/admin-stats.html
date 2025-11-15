@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Coffee House Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- Sidebar -->
+    <div id="sidebar" class="fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-amber-900 to-amber-800 text-white shadow-2xl z-50">
+        <div class="p-6 border-b border-amber-700">
+            <h1 class="text-2xl font-bold flex items-center">
+                <i class="fas fa-coffee mr-3"></i>
+                Coffee Admin
+            </h1>
+        </div>
+        
+        <nav class="mt-6">
+            <a href="admin-stats.html" class="flex items-center px-6 py-3 bg-amber-700 border-l-4 border-white">
+                <i class="fas fa-chart-line w-6"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="admin-products.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors">
+                <i class="fas fa-coffee w-6"></i>
+                <span>Sản phẩm</span>
+            </a>
+            <a href="admin-orders.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors">
+                <i class="fas fa-shopping-cart w-6"></i>
+                <span>Đơn hàng</span>
+            </a>
+            <a href="admin-promotions.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors">
+                <i class="fas fa-tag w-6"></i>
+                <span>Khuyến mãi</span>
+            </a>
+            <a href="admin-tables.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors">
+                <i class="fas fa-chair w-6"></i>
+                <span>Quản lý bàn</span>
+            </a>
+            <a href="admin-staff.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors">
+                <i class="fas fa-user-tie w-6"></i>
+                <span>Nhân viên</span>
+            </a>
+            <a href="admin-users.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors">
+                <i class="fas fa-users-cog w-6"></i>
+                <span>Khách hàng</span>
+            </a>
+            <a href="admin-inventory.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors">
+                <i class="fas fa-warehouse w-6"></i>
+                <span>Kho hàng</span>
+            </a>
+            <a href="admin-contacts.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors">
+                <i class="fas fa-envelope-open-text w-6"></i>
+                <span>Tin nhắn liên hệ</span>
+            </a>
+            <a href="admin-settings.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors">
+                <i class="fas fa-cog w-6"></i>
+                <span>Cài đặt</span>
+            </a>
+            <a href="../index.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors mt-4 border-t border-amber-700">
+                <i class="fas fa-home w-6"></i>
+                <span>Về trang chủ</span>
+            </a>
+            <a href="#" onclick="handleLogout()" class="flex items-center px-6 py-3 hover:bg-red-700 transition-colors">
+                <i class="fas fa-sign-out-alt w-6"></i>
+                <span>Đăng xuất</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="ml-64 p-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold text-gray-800">Dashboard Thống kê</h2>
+            <p class="text-gray-600 mt-2">Tổng quan hoạt động kinh doanh</p>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Revenue Card -->
+            <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl shadow-lg p-6 text-white">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <p class="text-blue-100 text-sm">Doanh thu hôm nay</p>
+                        <p class="text-3xl font-bold mt-2" id="todayRevenue">0 ₫</p>
+                    </div>
+                    <div class="bg-white bg-opacity-20 p-3 rounded-lg">
+                        <i class="fas fa-dollar-sign text-2xl"></i>
+                    </div>
+                </div>
+                <p class="text-blue-100 text-sm">
+                    <i class="fas fa-shopping-bag mr-1"></i>
+                    <span id="todayOrders">0</span> đơn hàng
+                </p>
+            </div>
+
+            <!-- Orders Card -->
+            <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-xl shadow-lg p-6 text-white">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <p class="text-green-100 text-sm">Tổng đơn hàng</p>
+                        <p class="text-3xl font-bold mt-2" id="totalOrders">0</p>
+                    </div>
+                    <div class="bg-white bg-opacity-20 p-3 rounded-lg">
+                        <i class="fas fa-shopping-cart text-2xl"></i>
+                    </div>
+                </div>
+                <p class="text-green-100 text-sm">
+                    <i class="fas fa-check mr-1"></i>
+                    <span id="completedOrders">0</span> hoàn thành
+                </p>
+            </div>
+
+            <!-- Customers Card -->
+            <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl shadow-lg p-6 text-white">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <p class="text-purple-100 text-sm">Khách hàng</p>
+                        <p class="text-3xl font-bold mt-2" id="totalCustomers">0</p>
+                    </div>
+                    <div class="bg-white bg-opacity-20 p-3 rounded-lg">
+                        <i class="fas fa-users text-2xl"></i>
+                    </div>
+                </div>
+                <p class="text-purple-100 text-sm">
+                    <i class="fas fa-user-plus mr-1"></i>
+                    <span id="newCustomers">0</span> mới
+                </p>
+            </div>
+
+            <!-- Products Card -->
+            <div class="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl shadow-lg p-6 text-white">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <p class="text-orange-100 text-sm">Sản phẩm</p>
+                        <p class="text-3xl font-bold mt-2" id="totalProducts">0</p>
+                    </div>
+                    <div class="bg-white bg-opacity-20 p-3 rounded-lg">
+                        <i class="fas fa-coffee text-2xl"></i>
+                    </div>
+                </div>
+                <p class="text-orange-100 text-sm">
+                    <i class="fas fa-check-circle mr-1"></i>
+                    <span id="activeProducts">0</span> đang bán
+                </p>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <!-- Revenue Chart -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">
+                    <i class="fas fa-chart-line text-amber-600 mr-2"></i>
+                    Doanh thu 7 ngày qua
+                </h3>
+                <div style="position: relative; height: 300px;">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Orders Chart -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">
+                    <i class="fas fa-chart-pie text-green-600 mr-2"></i>
+                    Đơn hàng theo trạng thái
+                </h3>
+                <div style="position: relative; height: 300px;">
+                    <canvas id="ordersChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Sections -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Top Products -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">
+                    <i class="fas fa-trophy text-yellow-500 mr-2"></i>
+                    Top sản phẩm bán chạy
+                </h3>
+                <div id="topProducts" class="space-y-3">
+                    <div class="text-center py-8 text-gray-400">
+                        <i class="fas fa-spinner fa-spin text-2xl mb-2"></i>
+                        <p>Đang tải...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Orders -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">
+                    <i class="fas fa-clock text-blue-500 mr-2"></i>
+                    Đơn hàng gần đây
+                </h3>
+                <div id="recentOrders" class="space-y-3">
+                    <div class="text-center py-8 text-gray-400">
+                        <i class="fas fa-spinner fa-spin text-2xl mb-2"></i>
+                        <p>Đang tải...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/admin/permissions.js"></script>
+    <script src="../assets/js/admin/admin-utils.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/admin/stats.js"></script>
+</body>
+</html>

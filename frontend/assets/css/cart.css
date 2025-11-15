@@ -1,0 +1,39 @@
+/* Cart styles */
+.cart {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.cart-items {
+    margin-bottom: 2rem;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 1rem 0;
+}
+
+.cart-item h4 {
+    margin: 0;
+}
+
+.checkout {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#checkout-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#checkout-form input,
+#checkout-form select {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}

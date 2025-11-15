@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Khuyến mãi - Coffee House Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CRITICAL: Permission check BEFORE page loads -->
+    <script>
+        (function() {
+            const userStr = localStorage.getItem('user') || sessionStorage.getItem('user');
+            if (!userStr) {
+                alert('Vui lòng đăng nhập!');
+                window.location.href = '../login.html';
+                return;
+            }
+            const user = JSON.parse(userStr);
+            // Staff CANNOT access promotions page
+            if (user.role === 'staff') {
+                alert('Bạn không có quyền truy cập trang này!\nVai trò: Nhân viên');
+                window.location.href = 'admin-orders.html';
+                return;
+            }
+            if (user.role !== 'admin') {
+                alert('Trang này chỉ dành cho Admin!');
+                window.location.href = '../login.html';
+                return;
+            }
+        })();
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Sidebar -->
+    <div class="fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-amber-900 to-amber-800 text-white shadow-2xl z-50">
+        <div class="p-6 border-b border-amber-700">
+            <h1 class="text-2xl font-bold flex items-center">
+                <i class="fas fa-coffee mr-3"></i>
+                Coffee Admin
+            </h1>
+        </div>
+        
+        <nav class="mt-6">
+            <a href="admin-stats.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors">
+                <i class="fas fa-chart-line w-6"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="admin-products.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors">
+                <i class="fas fa-coffee w-6"></i>
+                <span>Sản phẩm</span>
+            </a>
+            <a href="admin-orders.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors">
+                <i class="fas fa-shopping-cart w-6"></i>
+                <span>Đơn hàng</span>
+            </a>
+            <a href="admin-promotions.html" class="flex items-center px-6 py-3 bg-amber-700 border-l-4 border-white">
+                <i class="fas fa-tag w-6"></i>
+                <span>Khuyến mãi</span>
+            </a>
+            <a href="admin-tables.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors">
+                <i class="fas fa-chair w-6"></i>
+                <span>Quản lý bàn</span>
+            </a>
+            <a href="admin-staff.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors">
+                <i class="fas fa-users w-6"></i>
+                <span>Nhân viên</span>
+            </a>
+            <a href="admin-users.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors">
+                <i class="fas fa-users-cog w-6"></i>
+                <span>Khách hàng</span>
+            </a>
+            <a href="admin-inventory.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors">
+                <i class="fas fa-warehouse w-6"></i>
+                <span>Kho hàng</span>
+            </a>
+            <a href="admin-contacts.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors">
+                <i class="fas fa-envelope-open-text w-6"></i>
+                <span>Tin nhắn liên hệ</span>
+            </a>
+            <a href="admin-settings.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors">
+                <i class="fas fa-cog w-6"></i>
+                <span>Cài đặt</span>
+            </a>
+            <a href="../index.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors mt-4 border-t border-amber-700">
+                <i class="fas fa-home w-6"></i>
+                <span>Về trang chủ</span>
+            </a>
+            <a href="#" onclick="handleLogout()" class="flex items-center px-6 py-3 hover:bg-red-700 transition-colors">
+                <i class="fas fa-sign-out-alt w-6"></i>
+                <span>Đăng xuất</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="ml-64 p-8">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h2 class="text-3xl font-bold text-gray-800">Quản lý Khuyến mãi</h2>
+                <p class="text-gray-600 mt-2">Tạo và quản lý các chương trình khuyến mãi</p>
+            </div>
+            <button onclick="openAddModal()" class="bg-amber-600 hover:bg-amber-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg transition-all">
+                <i class="fas fa-plus mr-2"></i>Tạo khuyến mãi
+            </button>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm">Tổng khuyến mãi</p>
+                        <p class="text-3xl font-bold text-gray-800 mt-2" id="totalPromotions">0</p>
+                    </div>
+                    <div class="bg-blue-100 p-4 rounded-full">
+                        <i class="fas fa-tags text-blue-600 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm">Đang hoạt động</p>
+                        <p class="text-3xl font-bold text-green-600 mt-2" id="activePromotions">0</p>
+                    </div>
+                    <div class="bg-green-100 p-4 rounded-full">
+                        <i class="fas fa-check-circle text-green-600 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm">Sắp hết hạn</p>
+                        <p class="text-3xl font-bold text-orange-600 mt-2" id="expiringPromotions">0</p>
+                    </div>
+                    <div class="bg-orange-100 p-4 rounded-full">
+                        <i class="fas fa-clock text-orange-600 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm">Đã hết hạn</p>
+                        <p class="text-3xl font-bold text-gray-600 mt-2" id="expiredPromotions">0</p>
+                    </div>
+                    <div class="bg-gray-100 p-4 rounded-full">
+                        <i class="fas fa-times-circle text-gray-600 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Tìm kiếm</label>
+                    <input type="text" id="searchInput" placeholder="Tên, mã khuyến mãi..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Trạng thái</label>
+                    <select id="statusFilter" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
+                        <option value="">Tất cả</option>
+                        <option value="active">Đang hoạt động</option>
+                        <option value="upcoming">Sắp diễn ra</option>
+                        <option value="expired">Đã hết hạn</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Loại giảm giá</label>
+                    <select id="typeFilter" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
+                        <option value="">Tất cả</option>
+                        <option value="percentage">Phần trăm (%)</option>
+                        <option value="fixed">Số tiền cố định</option>
+                    </select>
+                </div>
+                <div class="flex items-end">
+                    <button onclick="applyFilters()" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold">
+                        <i class="fas fa-filter mr-2"></i>Lọc
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Promotions Table -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Khuyến mãi</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mã</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Giảm giá</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Thời gian</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Trạng thái</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody id="promotionsTableBody" class="bg-white divide-y divide-gray-200">
+                    <!-- Data will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Add/Edit Modal -->
+    <div id="promotionModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center">
+                <h3 class="text-2xl font-bold text-gray-800" id="modalTitle">Tạo khuyến mãi mới</h3>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            
+            <form id="promotionForm" class="p-6">
+                <input type="hidden" id="promotionId">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Basic Info -->
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Tên khuyến mãi <span class="text-red-500">*</span></label>
+                        <input type="text" id="title" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
+                    </div>
+                    
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Mô tả</label>
+                        <textarea id="description" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500"></textarea>
+                    </div>
+                    
+                    <!-- Discount Info -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Loại giảm giá <span class="text-red-500">*</span></label>
+                        <select id="discountType" required onchange="toggleDiscountFields()" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
+                            <option value="percentage">Phần trăm (%)</option>
+                            <option value="fixed">Số tiền cố định (VNĐ)</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Giá trị giảm <span class="text-red-500">*</span></label>
+                        <input type="number" id="discountValue" required min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Mã khuyến mãi</label>
+                        <input type="text" id="code" placeholder="VD: SUMMER2024" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 uppercase">
+                    </div>
+                    
+                    <div id="maxDiscountField">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Giảm tối đa (VNĐ)</label>
+                        <input type="number" id="maxDiscount" min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
+                    </div>
+                    
+                    <!-- Conditions -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Giá trị đơn hàng tối thiểu (VNĐ)</label>
+                        <input type="number" id="minOrderValue" min="0" value="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Số lượt sử dụng</label>
+                        <input type="number" id="usageLimit" min="0" placeholder="Không giới hạn" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
+                    </div>
+                    
+                    <!-- Date Range -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Ngày bắt đầu <span class="text-red-500">*</span></label>
+                        <input type="datetime-local" id="startDate" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Ngày kết thúc <span class="text-red-500">*</span></label>
+                        <input type="datetime-local" id="endDate" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
+                    </div>
+                    
+                    <!-- Status -->
+                    <div class="md:col-span-2">
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="checkbox" id="isActive" checked class="w-5 h-5 text-amber-600 border-gray-300 rounded focus:ring-amber-500">
+                            <span class="text-sm font-medium text-gray-700">Kích hoạt ngay</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="flex justify-end space-x-4 mt-8 pt-6 border-t border-gray-200">
+                    <button type="button" onclick="closeModal()" class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 font-semibold">
+                        Hủy
+                    </button>
+                    <button type="submit" class="px-6 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-semibold">
+                        <i class="fas fa-save mr-2"></i>Lưu
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../assets/js/admin/permissions.js"></script>
+    <script src="../assets/js/admin/admin-utils.js"></script>
+    <script src="../assets/js/admin/promotions.js"></script>
+</body>
+</html>

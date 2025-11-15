@@ -1,0 +1,220 @@
+/* Menu Page Styles */
+
+/* Menu Container */
+.menu {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Menu Items Grid */
+.menu-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* Menu Item Card */
+.menu-item {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.menu-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.menu-item h3 {
+    margin-top: 0;
+    color: #6F4E37;
+}
+
+.menu-item p {
+    color: #666;
+}
+
+/* Product Details */
+.product-details {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.product-info {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.product-info img {
+    max-width: 300px;
+    width: 100%;
+    border-radius: 12px;
+}
+
+/* Product Card Animations */
+.product-card {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Category Button Active State */
+.category-btn.active {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(111, 78, 55, 0.3);
+}
+
+/* Loading Spinner */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+/* Notification Animation */
+.menu-notification {
+    animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Search Input Focus Effect */
+#searchInput:focus {
+    box-shadow: 0 0 0 3px rgba(111, 78, 55, 0.1);
+}
+
+/* Product Grid Responsive */
+@media (max-width: 640px) {
+    .menu-items {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .product-info {
+        flex-direction: column;
+    }
+    
+    .product-info img {
+        max-width: 100%;
+    }
+}
+
+/* Sticky Filter Bar */
+.sticky {
+    position: sticky;
+    top: 80px;
+    z-index: 40;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.empty-state i {
+    font-size: 4rem;
+    color: #ddd;
+    margin-bottom: 1rem;
+}
+
+/* Badge Styles */
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.badge-bestseller {
+    background-color: #6F4E37;
+    color: white;
+}
+
+.badge-new {
+    background-color: #10b981;
+    color: white;
+}
+
+.badge-sale {
+    background-color: #ef4444;
+    color: white;
+}
+
+/* Price Display */
+.price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #6F4E37;
+}
+
+/* Add to Cart Button Hover Effect */
+button[onclick*="addToCart"]:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(111, 78, 55, 0.4);
+}
+
+/* View Details Button */
+button[onclick*="viewProductDetail"] {
+    transition: all 0.3s ease;
+}
+
+button[onclick*="viewProductDetail"]:hover {
+    transform: scale(1.05);
+}
+
+/* Cart Count Badge */
+#cartCount {
+    animation: pulse 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+/* Product Image Zoom Effect */
+.product-card img {
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover img {
+    transform: scale(1.1);
+}
+
+/* Smooth Transitions */
+* {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+

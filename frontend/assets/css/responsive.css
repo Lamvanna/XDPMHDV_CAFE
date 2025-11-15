@@ -1,0 +1,319 @@
+/* ===================================
+   RESPONSIVE STYLES
+   Media Queries for all breakpoints
+   =================================== */
+
+/* Mobile First Approach */
+
+/* Extra Small Devices (phones, less than 640px) */
+/* Default styles are mobile-first */
+
+/* Small Devices (landscape phones, 640px and up) */
+@media (min-width: 640px) {
+    /* Container */
+    .container {
+        padding: 0 var(--space-6);
+    }
+    
+    /* Typography */
+    .responsive-text-lg {
+        font-size: var(--text-lg);
+    }
+    
+    .responsive-text-xl {
+        font-size: var(--text-xl);
+    }
+    
+    /* Grid */
+    .sm\:grid-cols-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Flex */
+    .sm\:flex-row {
+        flex-direction: row;
+    }
+    
+    /* Display */
+    .sm\:block {
+        display: block;
+    }
+    
+    .sm\:hidden {
+        display: none;
+    }
+    
+    /* Spacing */
+    .sm\:px-6 {
+        padding-left: var(--space-6);
+        padding-right: var(--space-6);
+    }
+    
+    .sm\:gap-4 {
+        gap: var(--space-4);
+    }
+}
+
+/* Medium Devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    /* Container */
+    .container {
+        padding: 0 var(--space-8);
+    }
+    
+    /* Typography */
+    .md\:text-2xl {
+        font-size: var(--text-2xl);
+    }
+    
+    .md\:text-3xl {
+        font-size: var(--text-3xl);
+    }
+    
+    .md\:text-4xl {
+        font-size: var(--text-4xl);
+    }
+    
+    /* Grid */
+    .md\:grid-cols-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .md\:grid-cols-3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    /* Flex */
+    .md\:flex {
+        display: flex;
+    }
+    
+    .md\:flex-row {
+        flex-direction: row;
+    }
+    
+    /* Display */
+    .md\:block {
+        display: block;
+    }
+    
+    .md\:hidden {
+        display: none;
+    }
+    
+    /* Spacing */
+    .md\:px-8 {
+        padding-left: var(--space-8);
+        padding-right: var(--space-8);
+    }
+    
+    .md\:py-16 {
+        padding-top: var(--space-16);
+        padding-bottom: var(--space-16);
+    }
+    
+    /* Width */
+    .md\:w-auto {
+        width: auto;
+    }
+    
+    /* Height */
+    .md\:h-700 {
+        height: 700px;
+    }
+}
+
+/* Large Devices (desktops, 1024px and up) */
+@media (min-width: 1024px) {
+    /* Typography */
+    .lg\:text-3xl {
+        font-size: var(--text-3xl);
+    }
+    
+    .lg\:text-4xl {
+        font-size: var(--text-4xl);
+    }
+    
+    .lg\:text-5xl {
+        font-size: var(--text-5xl);
+    }
+    
+    /* Grid */
+    .lg\:grid-cols-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .lg\:grid-cols-3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .lg\:grid-cols-4 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    /* Flex */
+    .lg\:flex {
+        display: flex;
+    }
+    
+    /* Display */
+    .lg\:block {
+        display: block;
+    }
+    
+    .lg\:hidden {
+        display: none;
+    }
+    
+    /* Spacing */
+    .lg\:px-8 {
+        padding-left: var(--space-8);
+        padding-right: var(--space-8);
+    }
+    
+    .lg\:gap-8 {
+        gap: var(--space-8);
+    }
+    
+    /* Column Span */
+    .lg\:col-span-1 {
+        grid-column: span 1;
+    }
+    
+    .lg\:col-span-2 {
+        grid-column: span 2;
+    }
+    
+    .lg\:col-span-3 {
+        grid-column: span 3;
+    }
+}
+
+/* Extra Large Devices (large desktops, 1280px and up) */
+@media (min-width: 1280px) {
+    /* Grid */
+    .xl\:grid-cols-4 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .xl\:grid-cols-5 {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+/* 2XL Devices (larger desktops, 1536px and up) */
+@media (min-width: 1536px) {
+    /* Container */
+    .container {
+        max-width: 1536px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    /* Hide non-essential elements */
+    .site-header,
+    .site-footer,
+    .btn-back-top,
+    .mobile-menu-button {
+        display: none !important;
+    }
+    
+    /* Adjust colors for print */
+    body {
+        background-color: white;
+        color: black;
+    }
+    
+    /* Remove shadows */
+    .card,
+    .product-card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+    
+    /* Page breaks */
+    .page-break {
+        page-break-after: always;
+    }
+    
+    /* Links */
+    a {
+        text-decoration: underline;
+    }
+}
+
+/* Landscape Orientation */
+@media (orientation: landscape) and (max-height: 600px) {
+    .hero-section {
+        height: 500px;
+    }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* Optimize images for retina displays */
+    img {
+        image-rendering: -webkit-optimize-contrast;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Dark Mode Support (Optional) */
+@media (prefers-color-scheme: dark) {
+    /* Uncomment to enable dark mode */
+    /*
+    :root {
+        --color-cream: #1F2937;
+        --color-white: #111827;
+        --color-gray-800: #F9FAFB;
+        --color-gray-700: #E5E7EB;
+        --color-gray-600: #D1D5DB;
+    }
+    */
+}
+
+/* Hover Support */
+@media (hover: hover) and (pointer: fine) {
+    /* Enhanced hover effects for devices with precise pointing */
+    .product-card:hover {
+        transform: translateY(-8px);
+    }
+    
+    .btn:hover {
+        transform: translateY(-2px);
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+    /* Larger touch targets for mobile */
+    .btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .nav-link {
+        padding: var(--space-3) var(--space-4);
+    }
+    
+    /* Remove hover effects on touch devices */
+    .product-card:hover {
+        transform: none;
+    }
+    
+    .btn:hover {
+        transform: none;
+    }
+}

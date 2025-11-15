@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký | Coffee House</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'coffee': '#6F4E37',
+                        'cream': '#F9F4EE',
+                        'coffee-light': '#8B6F47',
+                        'coffee-dark': '#5D3E2A'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-slideIn {
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #6F4E37 0%, #8B6F47 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        .input-focus {
+            transition: all 0.3s ease;
+        }
+        
+        .input-focus:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(111, 78, 55, 0.15);
+        }
+        
+        .password-strength {
+            height: 4px;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="font-poppins">
+    <!-- Split Screen Layout -->
+    <div class="min-h-screen flex">
+        <!-- Left Side - Image/Branding -->
+        <div class="hidden lg:flex lg:w-1/2 gradient-bg relative overflow-hidden">
+            <div class="absolute inset-0 bg-black opacity-20"></div>
+            
+            <!-- Decorative circles -->
+            <div class="absolute top-20 left-20 w-72 h-72 bg-white opacity-10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 right-20 w-96 h-96 bg-white opacity-10 rounded-full blur-3xl"></div>
+            
+            <div class="relative z-10 flex flex-col items-center justify-center w-full p-12 text-white">
+                <div class="animate-float mb-8">
+                    <i class="fas fa-mug-hot text-8xl drop-shadow-2xl"></i>
+                </div>
+                <h1 class="text-5xl font-bold mb-4 text-center">Tham gia Coffee House</h1>
+                <p class="text-xl text-center opacity-90 max-w-md">
+                    Trở thành thành viên để nhận nhiều ưu đãi hấp dẫn
+                </p>
+                
+                <!-- Benefits -->
+                <div class="mt-12 space-y-4 w-full max-w-md">
+                    <div class="flex items-center space-x-4 bg-white bg-opacity-10 rounded-lg p-4 backdrop-blur-sm animate-slideIn" style="animation-delay: 0.1s">
+                        <div class="flex-shrink-0 w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                            <i class="fas fa-gift text-2xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold">Ưu đãi thành viên</div>
+                            <div class="text-sm opacity-80">Giảm giá đến 30% cho đơn hàng</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4 bg-white bg-opacity-10 rounded-lg p-4 backdrop-blur-sm animate-slideIn" style="animation-delay: 0.2s">
+                        <div class="flex-shrink-0 w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                            <i class="fas fa-star text-2xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold">Tích điểm thưởng</div>
+                            <div class="text-sm opacity-80">Đổi quà tặng hấp dẫn</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4 bg-white bg-opacity-10 rounded-lg p-4 backdrop-blur-sm animate-slideIn" style="animation-delay: 0.3s">
+                        <div class="flex-shrink-0 w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                            <i class="fas fa-shipping-fast text-2xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold">Giao hàng nhanh</div>
+                            <div class="text-sm opacity-80">Miễn phí vận chuyển cho đơn từ 50k</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Register Form -->
+        <div class="w-full lg:w-1/2 flex items-center justify-center p-8 bg-cream">
+            <div class="w-full max-w-md animate-fadeInUp">
+                <!-- Mobile Logo -->
+                <div class="lg:hidden text-center mb-8">
+                    <div class="inline-flex items-center justify-center w-20 h-20 bg-coffee rounded-full mb-4">
+                        <i class="fas fa-coffee text-white text-3xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-coffee">Coffee House</h2>
+                </div>
+
+                <!-- Register Card -->
+                <div class="glass-effect rounded-3xl shadow-2xl p-8">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-bold text-coffee mb-2">Tạo tài khoản mới</h2>
+                        <p class="text-gray-600">Điền thông tin để bắt đầu</p>
+                    </div>
+                    <!-- Alert Messages -->
+                    <div id="registerError" class="hidden mb-4 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-lg animate-fadeInUp">
+                        <div class="flex items-center">
+                            <i class="fas fa-exclamation-circle mr-3"></i>
+                            <span id="registerErrorMessage"></span>
+                        </div>
+                    </div>
+
+                    <div id="registerSuccess" class="hidden mb-4 p-4 bg-green-50 border-l-4 border-green-500 text-green-700 rounded-lg animate-fadeInUp">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle mr-3"></i>
+                            <span id="registerSuccessMessage"></span>
+                        </div>
+                    </div>
+
+                    <!-- Register Form -->
+                    <form id="registerForm" class="space-y-5" onsubmit="handleRegister(event)">
+                        <!-- Full Name -->
+                        <div>
+                            <label for="fullName" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-user mr-2 text-coffee"></i>Họ và tên
+                            </label>
+                            <input 
+                                type="text" 
+                                id="fullName" 
+                                name="fullName"
+                                required 
+                                class="input-focus w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-coffee focus:border-coffee outline-none"
+                                placeholder="Nguyễn Văn A"
+                            >
+                        </div>
+
+                        <!-- Email -->
+                        <div>
+                            <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-envelope mr-2 text-coffee"></i>Email
+                            </label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email"
+                                required 
+                                class="input-focus w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-coffee focus:border-coffee outline-none"
+                                placeholder="example@email.com"
+                            >
+                        </div>
+
+                        <!-- Phone -->
+                        <div>
+                            <label for="phone" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-phone mr-2 text-coffee"></i>Số điện thoại
+                            </label>
+                            <input 
+                                type="tel" 
+                                id="phone" 
+                                name="phone"
+                                required 
+                                pattern="[0-9]{10}"
+                                class="input-focus w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-coffee focus:border-coffee outline-none"
+                                placeholder="0123456789"
+                            >
+                            <p class="mt-1 text-xs text-gray-500">Định dạng: 10 chữ số</p>
+                        </div>
+
+                        <!-- Password -->
+                        <div>
+                            <label for="password" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-lock mr-2 text-coffee"></i>Mật khẩu
+                            </label>
+                            <div class="relative">
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    name="password"
+                                    required 
+                                    minlength="6"
+                                    class="input-focus w-full px-4 py-3 pr-12 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-coffee focus:border-coffee outline-none"
+                                    placeholder="••••••••"
+                                    oninput="checkPasswordStrength()"
+                                >
+                                <button 
+                                    type="button" 
+                                    onclick="togglePassword('password', 'passwordIcon')"
+                                    class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-coffee transition-colors"
+                                >
+                                    <i class="fas fa-eye" id="passwordIcon"></i>
+                                </button>
+                            </div>
+                            <!-- Password Strength Indicator -->
+                            <div class="mt-2">
+                                <div class="flex space-x-1">
+                                    <div id="strength-1" class="password-strength flex-1 bg-gray-200"></div>
+                                    <div id="strength-2" class="password-strength flex-1 bg-gray-200"></div>
+                                    <div id="strength-3" class="password-strength flex-1 bg-gray-200"></div>
+                                    <div id="strength-4" class="password-strength flex-1 bg-gray-200"></div>
+                                </div>
+                                <p id="strength-text" class="text-xs text-gray-500 mt-1">Ít nhất 6 ký tự</p>
+                            </div>
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div>
+                            <label for="confirmPassword" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-lock mr-2 text-coffee"></i>Xác nhận mật khẩu
+                            </label>
+                            <div class="relative">
+                                <input 
+                                    type="password" 
+                                    id="confirmPassword" 
+                                    name="confirmPassword"
+                                    required 
+                                    class="input-focus w-full px-4 py-3 pr-12 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-coffee focus:border-coffee outline-none"
+                                    placeholder="••••••••"
+                                >
+                                <button 
+                                    type="button" 
+                                    onclick="togglePassword('confirmPassword', 'confirmPasswordIcon')"
+                                    class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-coffee transition-colors"
+                                >
+                                    <i class="fas fa-eye" id="confirmPasswordIcon"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Terms -->
+                        <div class="flex items-start">
+                            <input 
+                                id="terms" 
+                                type="checkbox" 
+                                required
+                                class="w-5 h-5 mt-0.5 text-coffee border-2 border-gray-300 rounded focus:ring-coffee"
+                            >
+                            <label for="terms" class="ml-3 text-sm text-gray-600">
+                                Tôi đồng ý với 
+                                <a href="#" class="text-coffee hover:text-coffee-dark font-medium">Điều khoản sử dụng</a>
+                                và 
+                                <a href="#" class="text-coffee hover:text-coffee-dark font-medium">Chính sách bảo mật</a>
+                            </label>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button 
+                            type="submit" 
+                            id="registerBtn"
+                            class="w-full py-4 bg-coffee text-white font-semibold rounded-xl hover:bg-coffee-dark transform hover:scale-[1.02] transition-all duration-200 shadow-lg hover:shadow-xl"
+                        >
+                            <i class="fas fa-user-plus mr-2"></i>
+                            Đăng ký
+                        </button>
+                    </form>
+
+                    <!-- Divider -->
+                    <div class="my-6 flex items-center">
+                        <div class="flex-1 border-t border-gray-300"></div>
+                        <span class="px-4 text-sm text-gray-500">Hoặc</span>
+                        <div class="flex-1 border-t border-gray-300"></div>
+                    </div>
+
+                    <!-- Social Register -->
+                    <div class="space-y-3">
+                        <button 
+                            type="button"
+                            class="w-full py-3 px-4 border-2 border-gray-200 rounded-xl bg-white hover:bg-gray-50 font-medium text-gray-700 transition-all hover:border-coffee"
+                        >
+                            <i class="fab fa-google mr-2 text-red-500"></i>
+                            Đăng ký với Google
+                        </button>
+                        <button 
+                            type="button"
+                            class="w-full py-3 px-4 border-2 border-gray-200 rounded-xl bg-white hover:bg-gray-50 font-medium text-gray-700 transition-all hover:border-coffee"
+                        >
+                            <i class="fab fa-facebook mr-2 text-blue-600"></i>
+                            Đăng ký với Facebook
+                        </button>
+                    </div>
+
+                    <!-- Login Link -->
+                    <div class="mt-8 text-center">
+                        <p class="text-gray-600">
+                            Đã có tài khoản? 
+                            <a href="login.html" class="font-semibold text-coffee hover:text-coffee-dark transition-colors">
+                                Đăng nhập ngay
+                            </a>
+                        </p>
+                    </div>
+
+                    <!-- Back to Home -->
+                    <div class="mt-6 text-center">
+                        <a href="index.html" class="text-sm text-gray-500 hover:text-coffee transition-colors inline-flex items-center">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Về trang chủ
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core utility scripts -->
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/notification-manager.js"></script>
+    
+    <!-- Core managers -->
+    <script src="assets/js/cart-manager.js"></script>
+    <script src="assets/js/auth-manager.js"></script>
+    <script src="assets/js/navigation-manager.js"></script>
+    
+    <!-- API and legacy compatibility -->
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/auth.js"></script>
+    
+    <!-- Page-specific scripts -->
+    <script src="assets/js/register.js"></script>
+
+    <script>
+        // Debug: Check notification manager
+        console.log('🔔 Notification Manager:', typeof window.notificationManager);
+        console.log('✅ showError:', typeof window.showError);
+        console.log('✅ showSuccess:', typeof window.showSuccess);
+        
+        // Toggle password visibility
+        function togglePassword(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // Check password strength
+        function checkPasswordStrength() {
+            const password = document.getElementById('password').value;
+            const bars = [
+                document.getElementById('strength-1'),
+                document.getElementById('strength-2'),
+                document.getElementById('strength-3'),
+                document.getElementById('strength-4')
+            ];
+            const text = document.getElementById('strength-text');
+            
+            // Reset
+            bars.forEach(bar => {
+                bar.className = 'password-strength flex-1 bg-gray-200';
+            });
+            
+            if (password.length === 0) {
+                text.textContent = 'Ít nhất 6 ký tự';
+                text.className = 'text-xs text-gray-500 mt-1';
+                return;
+            }
+            
+            let strength = 0;
+            
+            if (password.length >= 6) strength++;
+            if (password.length >= 10) strength++;
+            if (/[A-Z]/.test(password) && /[a-z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+            
+            const colors = ['bg-red-500', 'bg-orange-500', 'bg-yellow-500', 'bg-green-500'];
+            const texts = ['Yếu', 'Trung bình', 'Tốt', 'Mạnh'];
+            const textColors = ['text-red-500', 'text-orange-500', 'text-yellow-500', 'text-green-500'];
+            
+            for (let i = 0; i < Math.min(strength, 4); i++) {
+                bars[i].className = `password-strength flex-1 ${colors[Math.min(strength - 1, 3)]}`;
+            }
+            
+            text.textContent = `Mật khẩu ${texts[Math.min(strength - 1, 3)]}`;
+            text.className = `text-xs ${textColors[Math.min(strength - 1, 3)]} mt-1 font-medium`;
+        }
+
+        // Show error message (Fixed - no recursion, prefers notification manager)
+        function showError(message) {
+            // Try notification manager first
+            if (typeof window.showError === 'function' && window.showError !== showError) {
+                window.showError(message, 5000);
+                return;
+            }
+            
+            // Fallback to inline display
+            const errorDiv = document.getElementById('registerError');
+            const messageSpan = document.getElementById('registerErrorMessage');
+            const successDiv = document.getElementById('registerSuccess');
+            
+            if (successDiv) successDiv.classList.add('hidden');
+            
+            if (errorDiv && messageSpan) {
+                messageSpan.textContent = message;
+                errorDiv.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    errorDiv.classList.add('hidden');
+                }, 5000);
+            } else {
+                // Ultimate fallback
+                alert(message);
+            }
+        }
+
+        // Show success message (Fixed - no recursion, prefers notification manager)
+        function showSuccess(message) {
+            // Try notification manager first
+            if (typeof window.showSuccess === 'function' && window.showSuccess !== showSuccess) {
+                window.showSuccess(message, 3000);
+                return;
+            }
+            
+            // Fallback to inline display
+            const errorDiv = document.getElementById('registerError');
+            const successDiv = document.getElementById('registerSuccess');
+            const messageSpan = document.getElementById('registerSuccessMessage');
+            
+            if (errorDiv) errorDiv.classList.add('hidden');
+            
+            if (successDiv && messageSpan) {
+                messageSpan.textContent = message;
+                successDiv.classList.remove('hidden');
+            } else {
+                // Ultimate fallback
+                alert(message);
+            }
+        }
+
+        // Handle register (Fixed - better validation and error handling)
+        async function handleRegister(e) {
+            e.preventDefault();
+            
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const registerBtn = document.getElementById('registerBtn');
+            
+            // Validation
+            if (!fullName || !email || !phone || !password || !confirmPassword) {
+                showError('Vui lòng điền đầy đủ thông tin');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showError('Mật khẩu xác nhận không khớp');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showError('Mật khẩu phải có ít nhất 6 ký tự');
+                return;
+            }
+            
+            if (!/^[0-9]{10}$/.test(phone)) {
+                showError('Số điện thoại không hợp lệ (10 chữ số)');
+                return;
+            }
+            
+            // Show loading
+            registerBtn.disabled = true;
+            registerBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Đang xử lý...';
+            
+            try {
+                const userData = {
+                    name: fullName,
+                    email: email,
+                    phone: phone,
+                    password: password,
+                    username: fullName  // ✅ Username là họ tên (fullName)
+                };
+                
+                console.log('📝 Registration data:', userData);
+                
+                const result = await register(userData);
+                console.log('✅ Registration result:', result);
+                
+                if (result && result.success) {
+                    if (typeof window.showSuccess === 'function') {
+                        window.showSuccess('Đăng ký thành công! Đang chuyển hướng...', 3000);
+                    } else {
+                        showSuccess('Đăng ký thành công! Đang chuyển hướng...');
+                    }
+                    
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1500);
+                } else {
+                    throw new Error(result.message || 'Đăng ký thất bại');
+                }
+            } catch (error) {
+                console.error('Register error:', error);
+                
+                let errorMessage = 'Đăng ký thất bại. Vui lòng thử lại.';
+                
+                const errorMsg = error.message ? error.message.toLowerCase() : '';
+                
+                // Check for specific error patterns
+                if (errorMsg.includes('email') && (errorMsg.includes('exist') || errorMsg.includes('đã') || errorMsg.includes('already'))) {
+                    errorMessage = 'Email đã được sử dụng. Vui lòng chọn email khác.';
+                } else if (errorMsg.includes('username') && (errorMsg.includes('exist') || errorMsg.includes('đã') || errorMsg.includes('already'))) {
+                    errorMessage = 'Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác.';
+                } else if (error.message) {
+                    errorMessage = error.message;
+                }
+                
+                if (typeof window.showError === 'function') {
+                    window.showError(errorMessage, 5000);
+                } else {
+                    showError(errorMessage);
+                }
+                
+                registerBtn.disabled = false;
+                registerBtn.innerHTML = '<i class="fas fa-user-plus mr-2"></i>Đăng ký';
+            }
+        }
+
+        // Check if already logged in
+        if (typeof isLoggedIn === 'function' && isLoggedIn()) {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng | Coffee House</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/transitions.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'coffee': '#6F4E37',
+                        'cream': '#F9F4EE',
+                        'coffee-light': '#8B6F47',
+                        'coffee-dark': '#5D3E2A'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-poppins bg-cream">    <!-- Header (Fixed) -->
+        <!-- Header (Fixed) -->
+        <!-- Header (Fixed) -->
+    <header class="bg-white shadow-lg fixed top-0 left-0 right-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-3 cursor-pointer hover:opacity-80 transition-opacity">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-coffee rounded-full flex items-center justify-center">
+                        <i class="fas fa-coffee text-white text-lg sm:text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl sm:text-2xl font-bold text-coffee">Coffee House</h1>
+                        <p class="text-xs text-gray-600 hidden sm:block">Premium Coffee Experience</p>
+                    </div>
+                </a>
+
+                <!-- Navigation Menu -->
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link text-gray-700 hover:text-coffee transition-colors">Trang chủ</a>
+                    <a href="menu.html" class="nav-link text-gray-700 hover:text-coffee transition-colors">Menu</a>
+                    <a href="reservation.html" class="nav-link text-gray-700 hover:text-coffee transition-colors">Đặt bàn</a>
+                    <a href="promotion.html" class="nav-link text-gray-700 hover:text-coffee transition-colors">Khuyến mãi</a>
+                    <a href="contact.html" class="nav-link text-gray-700 hover:text-coffee transition-colors">Liên hệ</a>
+                </nav>
+
+                <!-- Search Bar -->
+                <div class="hidden md:flex items-center bg-gray-100 rounded-full px-4 py-2 max-w-xs">
+                    <i class="fas fa-search text-gray-400 mr-2"></i>
+                    <input type="text" placeholder="Tìm kiếm món..." class="bg-transparent outline-none text-sm flex-1">
+                </div>
+
+                <!-- Actions -->
+                <div class="flex items-center space-x-2 sm:space-x-4">
+                    <!-- Cart -->
+                    <div class="relative">
+                        <a href="cart.html" class="p-2 bg-coffee text-white rounded-full hover:bg-coffee-dark transition-colors inline-block">
+                            <i class="fas fa-shopping-cart text-sm sm:text-base"></i>
+                        </a>
+                        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center" id="cartCount">0</span>
+                    </div>
+
+                    <!-- User Menu / Login Button -->
+                    <div class="relative user-menu">
+                        <!-- Login Button (shown when not logged in) -->
+                        <a href="login.html" id="loginBtn" data-no-transition class="bg-coffee text-white px-3 py-2 sm:px-4 sm:py-2 rounded-full hover:bg-coffee-dark transition-colors text-sm inline-flex items-center">
+                            <i class="fas fa-user mr-1 sm:mr-2"></i>
+                            <span class="hidden sm:inline">Đăng nhập</span>
+                        </a>
+                        
+                        <!-- User Button (shown when logged in) -->
+                        <button onclick="toggleUserMenu()" id="userBtn" class="hidden bg-coffee text-white px-3 py-2 sm:px-4 sm:py-2 rounded-full hover:bg-coffee-dark transition-colors text-sm items-center">
+                            <i class="fas fa-user mr-1 sm:mr-2"></i>
+                            <span id="userName">Tài khoản</span>
+                            <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                        </button>
+                        
+                        <!-- Dropdown Menu -->
+                        <div id="userDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 z-50">
+                            <a href="profile.html" class="block px-4 py-2 text-gray-700 hover:bg-coffee hover:text-white transition-colors">
+                                <i class="fas fa-user-circle mr-2"></i>Hồ sơ
+                            </a>
+                            <a href="my-orders.html" class="block px-4 py-2 text-gray-700 hover:bg-coffee hover:text-white transition-colors">
+                                <i class="fas fa-shopping-bag mr-2"></i>Đơn hàng
+                            </a>
+                            <a href="reservation-history.html" class="block px-4 py-2 text-gray-700 hover:bg-coffee hover:text-white transition-colors">
+                                <i class="fas fa-history mr-2"></i>Lịch sử đặt bàn
+                            </a>
+                            <hr class="my-2">
+                            <a href="#" onclick="logout(); return false;" class="block px-4 py-2 text-red-600 hover:bg-red-50 transition-colors">
+                                <i class="fas fa-sign-out-alt mr-2"></i>Đăng xuất
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <button class="lg:hidden p-2" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars text-coffee text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="lg:hidden bg-white border-t border-gray-200 hidden">
+            <nav class="container mx-auto px-4 py-4 space-y-3">
+                <a href="index.html" class="block text-gray-700 hover:text-coffee">Trang chủ</a>
+                <a href="menu.html" class="block text-gray-700 hover:text-coffee">Menu</a>
+                <a href="reservation.html" class="block text-gray-700 hover:text-coffee">Đặt bàn</a>
+                <a href="promotion.html" class="block text-gray-700 hover:text-coffee">Khuyến mãi</a>
+                <a href="contact.html" class="block text-gray-700 hover:text-coffee">Liên hệ</a>
+                <div class="pt-3 border-t border-gray-200">
+                    <a href="profile.html" class="block text-gray-700 hover:text-coffee py-2">
+                        <i class="fas fa-user-circle mr-2"></i>Hồ sơ
+                    </a>
+                    <a href="my-orders.html" class="block text-gray-700 hover:text-coffee py-2">
+                        <i class="fas fa-shopping-bag mr-2"></i>Đơn hàng của tôi
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-24">
+        <!-- Breadcrumb -->
+        <section class="bg-white py-4 border-b border-gray-200">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <nav class="flex items-center space-x-2 text-sm">
+                    <a href="#" class="text-gray-600 hover:text-coffee transition-colors">Trang chủ</a>
+                    <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                    <span class="text-coffee font-semibold">Giỏ hàng</span>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Cart Section -->
+        <section class="py-12">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between mb-8">
+                    <h1 class="text-3xl sm:text-4xl font-bold text-coffee">Giỏ hàng của bạn</h1>
+                    <div class="text-sm text-gray-600">
+                        <span id="itemCount">3</span> sản phẩm
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Cart Items -->
+                    <div class="lg:col-span-2">
+                        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                            <!-- Cart Header -->
+                            <div class="bg-coffee text-white px-6 py-4">
+                                <div class="grid grid-cols-12 gap-4 items-center">
+                                    <div class="col-span-6 sm:col-span-5">Sản phẩm</div>
+                                    <div class="col-span-2 text-center hidden sm:block">Đơn giá</div>
+                                    <div class="col-span-2 text-center">Số lượng</div>
+                                    <div class="col-span-2 text-center">Thành tiền</div>
+                                    <div class="col-span-2 sm:col-span-1 text-center">Xóa</div>
+                                </div>
+                            </div>
+
+                            <!-- Cart Items List -->
+                            <div class="divide-y divide-gray-200" id="cartItems">
+                                <!-- Cart Item 1 -->
+                                <div class="p-6 cart-item" data-id="1">
+                                    <div class="grid grid-cols-12 gap-4 items-center">
+                                        <!-- Product Info -->
+                                        <div class="col-span-6 sm:col-span-5">
+                                            <div class="flex items-center space-x-4">
+                                                <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Cappuccino" class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg">
+                                                <div class="flex-1 min-w-0">
+                                                    <h3 class="text-lg font-semibold text-coffee truncate">Cappuccino</h3>
+                                                    <div class="text-sm text-gray-600 space-y-1">
+                                                        <p>Size: <span class="font-medium">Vừa</span></p>
+                                                        <p>Đá: <span class="font-medium">Bình thường</span></p>
+                                                        <p>Topping: <span class="font-medium">Whipped Cream</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Unit Price -->
+                                        <div class="col-span-2 text-center hidden sm:block">
+                                            <span class="text-lg font-semibold text-coffee">85,000₫</span>
+                                        </div>
+
+                                        <!-- Quantity -->
+                                        <div class="col-span-2 text-center">
+                                            <div class="flex items-center justify-center">
+                                                <button class="w-8 h-8 bg-gray-100 rounded-l-lg hover:bg-gray-200 transition-colors" onclick="updateQuantity(1, -1)">
+                                                    <i class="fas fa-minus text-xs"></i>
+                                                </button>
+                                                <span class="w-12 h-8 bg-gray-50 flex items-center justify-center border-t border-b border-gray-200 font-semibold quantity" data-quantity="2">2</span>
+                                                <button class="w-8 h-8 bg-gray-100 rounded-r-lg hover:bg-gray-200 transition-colors" onclick="updateQuantity(1, 1)">
+                                                    <i class="fas fa-plus text-xs"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Total Price -->
+                                        <div class="col-span-2 text-center">
+                                            <span class="text-lg font-bold text-coffee item-total" data-price="85000">170,000₫</span>
+                                        </div>
+
+                                        <!-- Remove Button -->
+                                        <div class="col-span-2 sm:col-span-1 text-center">
+                                            <button class="w-8 h-8 bg-red-100 text-red-600 rounded-full hover:bg-red-200 transition-colors" onclick="removeItem(1)">
+                                                <i class="fas fa-trash text-xs"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Cart Item 2 -->
+                                <div class="p-6 cart-item" data-id="2">
+                                    <div class="grid grid-cols-12 gap-4 items-center">
+                                        <!-- Product Info -->
+                                        <div class="col-span-6 sm:col-span-5">
+                                            <div class="flex items-center space-x-4">
+                                                <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Latte" class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg">
+                                                <div class="flex-1 min-w-0">
+                                                    <h3 class="text-lg font-semibold text-coffee truncate">Latte</h3>
+                                                    <div class="text-sm text-gray-600 space-y-1">
+                                                        <p>Size: <span class="font-medium">Lớn</span></p>
+                                                        <p>Đá: <span class="font-medium">Ít đá</span></p>
+                                                        <p>Topping: <span class="font-medium">Không</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Unit Price -->
+                                        <div class="col-span-2 text-center hidden sm:block">
+                                            <span class="text-lg font-semibold text-coffee">80,000₫</span>
+                                        </div>
+
+                                        <!-- Quantity -->
+                                        <div class="col-span-2 text-center">
+                                            <div class="flex items-center justify-center">
+                                                <button class="w-8 h-8 bg-gray-100 rounded-l-lg hover:bg-gray-200 transition-colors" onclick="updateQuantity(2, -1)">
+                                                    <i class="fas fa-minus text-xs"></i>
+                                                </button>
+                                                <span class="w-12 h-8 bg-gray-50 flex items-center justify-center border-t border-b border-gray-200 font-semibold quantity" data-quantity="1">1</span>
+                                                <button class="w-8 h-8 bg-gray-100 rounded-r-lg hover:bg-gray-200 transition-colors" onclick="updateQuantity(2, 1)">
+                                                    <i class="fas fa-plus text-xs"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Total Price -->
+                                        <div class="col-span-2 text-center">
+                                            <span class="text-lg font-bold text-coffee item-total" data-price="80000">80,000₫</span>
+                                        </div>
+
+                                        <!-- Remove Button -->
+                                        <div class="col-span-2 sm:col-span-1 text-center">
+                                            <button class="w-8 h-8 bg-red-100 text-red-600 rounded-full hover:bg-red-200 transition-colors" onclick="removeItem(2)">
+                                                <i class="fas fa-trash text-xs"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Cart Item 3 -->
+                                <div class="p-6 cart-item" data-id="3">
+                                    <div class="grid grid-cols-12 gap-4 items-center">
+                                        <!-- Product Info -->
+                                        <div class="col-span-6 sm:col-span-5">
+                                            <div class="flex items-center space-x-4">
+                                                <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Mocha" class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg">
+                                                <div class="flex-1 min-w-0">
+                                                    <h3 class="text-lg font-semibold text-coffee truncate">Mocha</h3>
+                                                    <div class="text-sm text-gray-600 space-y-1">
+                                                        <p>Size: <span class="font-medium">Nhỏ</span></p>
+                                                        <p>Đá: <span class="font-medium">Không đá</span></p>
+                                                        <p>Topping: <span class="font-medium">Extra Shot</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Unit Price -->
+                                        <div class="col-span-2 text-center hidden sm:block">
+                                            <span class="text-lg font-semibold text-coffee">90,000₫</span>
+                                        </div>
+
+                                        <!-- Quantity -->
+                                        <div class="col-span-2 text-center">
+                                            <div class="flex items-center justify-center">
+                                                <button class="w-8 h-8 bg-gray-100 rounded-l-lg hover:bg-gray-200 transition-colors" onclick="updateQuantity(3, -1)">
+                                                    <i class="fas fa-minus text-xs"></i>
+                                                </button>
+                                                <span class="w-12 h-8 bg-gray-50 flex items-center justify-center border-t border-b border-gray-200 font-semibold quantity" data-quantity="1">1</span>
+                                                <button class="w-8 h-8 bg-gray-100 rounded-r-lg hover:bg-gray-200 transition-colors" onclick="updateQuantity(3, 1)">
+                                                    <i class="fas fa-plus text-xs"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Total Price -->
+                                        <div class="col-span-2 text-center">
+                                            <span class="text-lg font-bold text-coffee item-total" data-price="90000">90,000₫</span>
+                                        </div>
+
+                                        <!-- Remove Button -->
+                                        <div class="col-span-2 sm:col-span-1 text-center">
+                                            <button class="w-8 h-8 bg-red-100 text-red-600 rounded-full hover:bg-red-200 transition-colors" onclick="removeItem(3)">
+                                                <i class="fas fa-trash text-xs"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Cart Actions -->
+                            <div class="p-6 bg-gray-50 border-t border-gray-200">
+                                <div class="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+                                    <button class="w-full sm:w-auto bg-white border border-gray-300 text-gray-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-50 transition-colors" onclick="continueShopping()">
+                                        <i class="fas fa-arrow-left mr-2"></i>Tiếp tục mua hàng
+                                    </button>
+                                    <button class="w-full sm:w-auto bg-red-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-red-600 transition-colors" onclick="clearCart()">
+                                        <i class="fas fa-trash mr-2"></i>Xóa tất cả
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cart Summary -->
+                    <div class="lg:col-span-1">
+                        <div class="bg-white rounded-2xl shadow-lg p-6 sticky top-28">
+                            <h2 class="text-2xl font-bold text-coffee mb-6">Tóm tắt đơn hàng</h2>
+                            
+                            <!-- Order Summary -->
+                            <div class="space-y-4 mb-6">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-600">Tạm tính:</span>
+                                    <span class="font-semibold" id="subtotal">340,000₫</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-600">Phí giao hàng:</span>
+                                    <span class="font-semibold text-green-600" id="shipping">Miễn phí</span>
+                                </div>
+                                
+                                <!-- Discount Section -->
+                                <div class="border-t border-gray-200 pt-4">
+                                    <!-- Applied Promotion Display -->
+                                    <div id="appliedPromotion" class="hidden mb-4 p-4 bg-gradient-to-r from-yellow-50 to-orange-50 border-2 border-yellow-400 rounded-xl">
+                                        <div class="flex items-start justify-between">
+                                            <div class="flex-1">
+                                                <div class="flex items-center space-x-2 mb-2">
+                                                    <i class="fas fa-ticket-alt text-yellow-600"></i>
+                                                    <span class="font-bold text-gray-800" id="appliedPromoName">Mã khuyến mãi</span>
+                                                </div>
+                                                <p class="text-sm text-gray-600 mb-2" id="appliedPromoDesc">Mô tả khuyến mãi</p>
+                                                <div class="flex items-center space-x-2">
+                                                    <span class="px-3 py-1 bg-yellow-500 text-white rounded-full text-xs font-bold" id="appliedPromoCode">CODE</span>
+                                                    <span class="text-green-600 font-semibold text-sm" id="appliedPromoValue">-50,000₫</span>
+                                                </div>
+                                            </div>
+                                            <button onclick="removePromotion()" class="text-red-500 hover:text-red-700 transition-colors">
+                                                <i class="fas fa-times-circle text-xl"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Promotion Input -->
+                                    <div id="promotionInput">
+                                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                            <i class="fas fa-gift mr-2 text-yellow-600"></i>Mã khuyến mãi
+                                        </label>
+                                        <div class="flex items-center space-x-2 mb-3">
+                                            <div class="relative flex-1">
+                                                <input type="text" 
+                                                       placeholder="Nhập mã giảm giá" 
+                                                       class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition-all uppercase" 
+                                                       id="couponCode"
+                                                       maxlength="20">
+                                                <i class="fas fa-tag absolute right-3 top-3.5 text-gray-400"></i>
+                                            </div>
+                                            <button class="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white px-6 py-3 rounded-xl text-sm font-bold transition-all transform hover:scale-105 shadow-md" 
+                                                    onclick="applyPromotion()">
+                                                <i class="fas fa-check mr-1"></i>Áp dụng
+                                            </button>
+                                        </div>
+                                        <div class="flex items-center justify-between text-xs text-gray-500 mb-2">
+                                            <span><i class="fas fa-info-circle mr-1"></i>Nhập mã để nhận ưu đãi</span>
+                                            <a href="promotion.html" class="text-yellow-600 hover:text-yellow-700 font-semibold">
+                                                <i class="fas fa-tags mr-1"></i>Xem khuyến mãi
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Discount Amount Display -->
+                                    <div id="discountAmount" class="hidden mt-3 pt-3 border-t border-gray-200">
+                                        <div class="flex justify-between items-center text-green-600">
+                                            <span class="font-semibold"><i class="fas fa-tags mr-2"></i>Giảm giá:</span>
+                                            <span class="text-lg font-bold" id="discount">-0₫</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Total -->
+                            <div class="border-t border-gray-200 pt-4 mb-6">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xl font-bold text-coffee">Tổng cộng:</span>
+                                    <span class="text-2xl font-bold text-coffee" id="total">374,000₫</span>
+                                </div>
+                            </div>
+
+                            <!-- Checkout Button -->
+                            <button class="w-full bg-coffee text-white py-4 rounded-full text-lg font-bold hover:bg-coffee-dark transition-colors transform hover:scale-105" onclick="proceedToCheckout()">
+                                <i class="fas fa-credit-card mr-2"></i>Thanh toán
+                            </button>
+
+                            <!-- Payment Methods -->
+                            <div class="mt-6">
+                                <p class="text-sm text-gray-600 mb-3">Phương thức thanh toán:</p>
+                                <div class="flex items-center space-x-3">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa" class="h-6">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" class="h-6">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg" alt="American Express" class="h-6">
+                                    <div class="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">MOMO</div>
+                                </div>
+                            </div>
+
+                            <!-- Security Badge -->
+                            <div class="mt-6 p-4 bg-green-50 rounded-lg">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-shield-alt text-green-600"></i>
+                                    <div>
+                                        <p class="text-sm font-semibold text-green-800">Thanh toán an toàn</p>
+                                        <p class="text-xs text-green-600">Thông tin của bạn được bảo mật 100%</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Empty Cart State (Hidden by default) -->
+                <div class="hidden text-center py-16" id="emptyCart">
+                    <div class="max-w-md mx-auto">
+                        <div class="w-32 h-32 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-shopping-cart text-gray-400 text-4xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-coffee mb-4">Giỏ hàng trống</h2>
+                        <p class="text-gray-600 mb-8">Bạn chưa có sản phẩm nào trong giỏ hàng. Hãy khám phá menu của chúng tôi!</p>
+                        <button class="bg-coffee text-white px-8 py-3 rounded-full font-semibold hover:bg-coffee-dark transition-colors" onclick="goToMenu()">
+                            <i class="fas fa-utensils mr-2"></i>Xem Menu
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommended Products -->
+        <section class="py-12 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold text-coffee text-center mb-12">Có thể bạn sẽ thích</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Recommended Product 1 -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group border border-gray-100">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1497636577773-f1231844b336?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Americano" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
+                                <button class="bg-white text-coffee px-4 py-2 rounded-full font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <i class="fas fa-eye mr-2"></i>Xem chi tiết
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-lg font-bold text-coffee mb-2">Americano</h3>
+                            <p class="text-gray-600 text-sm mb-3">Cà phê đen nguyên chất đậm đà</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xl font-bold text-coffee">60,000₫</span>
+                                <button class="bg-coffee text-white px-3 py-2 rounded-full hover:bg-coffee-dark transition-colors" onclick="addToCartQuick('americano', 60000)">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recommended Product 2 -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group border border-gray-100">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Espresso" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
+                                <button class="bg-white text-coffee px-4 py-2 rounded-full font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <i class="fas fa-eye mr-2"></i>Xem chi tiết
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-lg font-bold text-coffee mb-2">Espresso</h3>
+                            <p class="text-gray-600 text-sm mb-3">Tinh túy của cà phê đậm đà</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xl font-bold text-coffee">80,000₫</span>
+                                <button class="bg-coffee text-white px-3 py-2 rounded-full hover:bg-coffee-dark transition-colors" onclick="addToCartQuick('espresso', 80000)">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recommended Product 3 -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group border border-gray-100">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Macchiato" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
+                                <button class="bg-white text-coffee px-4 py-2 rounded-full font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <i class="fas fa-eye mr-2"></i>Xem chi tiết
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-lg font-bold text-coffee mb-2">Macchiato</h3>
+                            <p class="text-gray-600 text-sm mb-3">Espresso với chút sữa foam</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xl font-bold text-coffee">85,000₫</span>
+                                <button class="bg-coffee text-white px-3 py-2 rounded-full hover:bg-coffee-dark transition-colors" onclick="addToCartQuick('macchiato', 85000)">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recommended Product 4 -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group border border-gray-100">
+                        <div class="relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1485808191679-5f86510681a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Frappuccino" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
+                                <button class="bg-white text-coffee px-4 py-2 rounded-full font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <i class="fas fa-eye mr-2"></i>Xem chi tiết
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-lg font-bold text-coffee mb-2">Frappuccino</h3>
+                            <p class="text-gray-600 text-sm mb-3">Cà phê đá xay mát lạnh</p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xl font-bold text-coffee">95,000₫</span>
+                                <button class="bg-coffee text-white px-3 py-2 rounded-full hover:bg-coffee-dark transition-colors" onclick="addToCartQuick('frappuccino', 95000)">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-coffee text-white py-16">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+                            <i class="fas fa-coffee text-coffee text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">Coffee House</h3>
+                            <p class="text-sm opacity-80">Premium Coffee Experience</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        Nơi hội tụ của những tín đồ cà phê thực thụ với hương vị đậm đà và không gian ấm cúng.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-xl font-semibold mb-6">Liên Kết Nhanh</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Trang chủ</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Menu</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Đặt bàn</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Khuyến mãi</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Liên hệ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-xl font-semibold mb-6">Thông Tin Liên Hệ</h4>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-map-marker-alt text-cream mt-1"></i>
+                            <div>
+                                <p class="text-gray-300">123 Nguyễn Văn Linh</p>
+                                <p class="text-gray-300">Quận 7, TP.HCM</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-phone text-cream"></i>
+                            <p class="text-gray-300">0123 456 789</p>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-envelope text-cream"></i>
+                            <p class="text-gray-300">info@coffeehouse.vn</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Opening Hours -->
+                <div>
+                    <h4 class="text-xl font-semibold mb-6">Giờ Mở Cửa</h4>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-300">Thứ 2 - Thứ 6:</span>
+                            <span class="text-white font-semibold">7:00 - 22:00</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-300">Thứ 7 - Chủ nhật:</span>
+                            <span class="text-white font-semibold">6:30 - 23:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-white border-opacity-20 mt-12 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-300 mb-4 md:mb-0">
+                        © 2024 Coffee House. All rights reserved.
+                    </p>
+                    <div class="flex space-x-6 text-sm">
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors">Chính sách bảo mật</a>
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors">Điều khoản sử dụng</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Core utility scripts -->
+    <script src="assets/js/utils.js"></script>
+    
+    <!-- Core managers -->
+    <script src="assets/js/cart-manager.js"></script>
+    <script src="assets/js/auth-manager.js"></script>
+    <script src="assets/js/navigation-manager.js"></script>
+    
+    <!-- API and legacy compatibility -->
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/auth.js"></script>
+    
+    <!-- Page-specific scripts -->
+    <script src="assets/js/cart.js"></script>
+    <script src="assets/js/user-menu.js"></script>
+</body>
+</html>

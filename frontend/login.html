@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập | Coffee House</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'coffee': '#6F4E37',
+                        'cream': '#F9F4EE',
+                        'coffee-light': '#8B6F47',
+                        'coffee-dark': '#5D3E2A'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #6F4E37 0%, #8B6F47 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        .input-focus {
+            transition: all 0.3s ease;
+        }
+        
+        .input-focus:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(111, 78, 55, 0.15);
+        }
+    </style>
+</head>
+<body class="font-poppins">
+    <!-- Split Screen Layout -->
+    <div class="min-h-screen flex">
+        <!-- Left Side - Image/Branding -->
+        <div class="hidden lg:flex lg:w-1/2 gradient-bg relative overflow-hidden">
+            <div class="absolute inset-0 bg-black opacity-20"></div>
+            
+            <!-- Decorative circles -->
+            <div class="absolute top-20 left-20 w-72 h-72 bg-white opacity-10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 right-20 w-96 h-96 bg-white opacity-10 rounded-full blur-3xl"></div>
+            
+            <div class="relative z-10 flex flex-col items-center justify-center w-full p-12 text-white">
+                <div class="animate-float mb-8">
+                    <i class="fas fa-coffee text-8xl drop-shadow-2xl"></i>
+                </div>
+                <h1 class="text-5xl font-bold mb-4 text-center">Coffee House</h1>
+                <p class="text-xl text-center opacity-90 max-w-md">
+                    Nơi hội tụ tinh hoa cà phê và niềm đam mê phục vụ
+                </p>
+                
+                <!-- Features -->
+                <div class="mt-12 space-y-4 w-full max-w-md">
+                    <div class="flex items-center space-x-4 bg-white bg-opacity-10 rounded-lg p-4 backdrop-blur-sm">
+                        <i class="fas fa-check-circle text-2xl"></i>
+                        <span>Cà phê tươi nguyên chất 100%</span>
+                    </div>
+                    <div class="flex items-center space-x-4 bg-white bg-opacity-10 rounded-lg p-4 backdrop-blur-sm">
+                        <i class="fas fa-check-circle text-2xl"></i>
+                        <span>Giao hàng nhanh trong 30 phút</span>
+                    </div>
+                    <div class="flex items-center space-x-4 bg-white bg-opacity-10 rounded-lg p-4 backdrop-blur-sm">
+                        <i class="fas fa-check-circle text-2xl"></i>
+                        <span>Ưu đãi hấp dẫn cho thành viên</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Login Form -->
+        <div class="w-full lg:w-1/2 flex items-center justify-center p-8 bg-cream">
+            <div class="w-full max-w-md animate-fadeInUp">
+                <!-- Mobile Logo -->
+                <div class="lg:hidden text-center mb-8">
+                    <div class="inline-flex items-center justify-center w-20 h-20 bg-coffee rounded-full mb-4">
+                        <i class="fas fa-coffee text-white text-3xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-coffee">Coffee House</h2>
+                </div>
+
+                <!-- Login Card -->
+                <div class="glass-effect rounded-3xl shadow-2xl p-8">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-bold text-coffee mb-2">Chao mung tro lai!</h2>
+                        <p class="text-gray-600">Dang nhap de tiep tuc</p>
+                    </div>
+                    <!-- Alert Messages -->
+                    <div id="loginError" class="hidden mb-4 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-lg animate-fadeInUp">
+                        <div class="flex items-center">
+                            <i class="fas fa-exclamation-circle mr-3"></i>
+                            <span id="loginErrorMessage"></span>
+                        </div>
+                    </div>
+
+                    <div id="loginSuccess" class="hidden mb-4 p-4 bg-green-50 border-l-4 border-green-500 text-green-700 rounded-lg animate-fadeInUp">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle mr-3"></i>
+                            <span id="loginSuccessMessage"></span>
+                        </div>
+                    </div>
+
+                    <!-- Login Form -->
+                    <form id="loginForm" class="space-y-6" onsubmit="handleLogin(event)">
+                        <!-- Email -->
+                        <div>
+                            <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-envelope mr-2 text-coffee"></i>Email
+                            </label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email"
+                                required 
+                                class="input-focus w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-coffee focus:border-coffee outline-none"
+                                placeholder="example@email.com"
+                            >
+                        </div>
+
+                        <!-- Password -->
+                        <div>
+                            <label for="password" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-lock mr-2 text-coffee"></i>Mật khẩu
+                            </label>
+                            <div class="relative">
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    name="password"
+                                    required 
+                                    class="input-focus w-full px-4 py-3 pr-12 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-coffee focus:border-coffee outline-none"
+                                    placeholder="••••••••"
+                                >
+                                <button 
+                                    type="button" 
+                                    onclick="togglePassword('password', 'passwordIcon')"
+                                    class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-coffee transition-colors"
+                                >
+                                    <i class="fas fa-eye" id="passwordIcon"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Remember & Forgot -->
+                        <div class="flex items-center justify-between">
+                            <label class="flex items-center cursor-pointer">
+                                <input 
+                                    id="rememberMe" 
+                                    type="checkbox" 
+                                    class="w-4 h-4 text-coffee border-gray-300 rounded focus:ring-coffee"
+                                >
+                                <span class="ml-2 text-sm text-gray-700">Ghi nhớ đăng nhập</span>
+                            </label>
+
+                            <a href="#" class="text-sm font-medium text-coffee hover:text-coffee-dark transition-colors">
+                                Quên mật khẩu?
+                            </a>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button 
+                            type="submit" 
+                            id="loginBtn"
+                            class="w-full py-4 bg-coffee text-white font-semibold rounded-xl hover:bg-coffee-dark transform hover:scale-[1.02] transition-all duration-200 shadow-lg hover:shadow-xl"
+                        >
+                            <i class="fas fa-sign-in-alt mr-2"></i>
+                            Đăng nhập
+                        </button>
+                    </form>
+
+                    <!-- Divider -->
+                    <div class="my-6 flex items-center">
+                        <div class="flex-1 border-t border-gray-300"></div>
+                        <span class="px-4 text-sm text-gray-500">Hoặc</span>
+                        <div class="flex-1 border-t border-gray-300"></div>
+                    </div>
+
+                    <!-- Social Login -->
+                    <div class="space-y-3">
+                        <button 
+                            type="button"
+                            class="w-full py-3 px-4 border-2 border-gray-200 rounded-xl bg-white hover:bg-gray-50 font-medium text-gray-700 transition-all hover:border-coffee"
+                            onclick="alert('Tính năng đăng nhập Google đang phát triển')"
+                        >
+                            <i class="fab fa-google mr-2 text-red-500"></i>
+                            Tiếp tục với Google
+                        </button>
+                        <button 
+                            type="button"
+                            class="w-full py-3 px-4 border-2 border-gray-200 rounded-xl bg-white hover:bg-gray-50 font-medium text-gray-700 transition-all hover:border-coffee"
+                            onclick="alert('Tính năng đăng nhập Facebook đang phát triển')"
+                        >
+                            <i class="fab fa-facebook mr-2 text-blue-600"></i>
+                            Tiếp tục với Facebook
+                        </button>
+                    </div>
+
+                    <!-- Register Link -->
+                    <div class="mt-8 text-center">
+                        <p class="text-gray-600">
+                            Chưa có tài khoản? 
+                            <a href="register.html" class="font-semibold text-coffee hover:text-coffee-dark transition-colors">
+                                Đăng ký ngay
+                            </a>
+                        </p>
+                    </div>
+
+                    <!-- Back to Home -->
+                    <div class="mt-6 text-center">
+                        <a href="index.html" class="text-sm text-gray-500 hover:text-coffee transition-colors inline-flex items-center">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Về trang chủ
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core utility scripts -->
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/notification-manager.js"></script>
+    
+    <!-- Core managers -->
+    <script src="assets/js/cart-manager.js"></script>
+    <script src="assets/js/auth-manager.js"></script>
+    <script src="assets/js/navigation-manager.js"></script>
+    
+    <!-- API and legacy compatibility -->
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/auth.js"></script>
+    
+    <!-- Page-specific scripts -->
+    <script src="assets/js/login.js"></script>
+
+    <script>
+        // Toggle password visibility
+        function togglePassword(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // Show error message
+        function showError(message) {
+            const errorDiv = document.getElementById('loginError');
+            const messageSpan = document.getElementById('loginErrorMessage');
+            const successDiv = document.getElementById('loginSuccess');
+            
+            if (successDiv) successDiv.classList.add('hidden');
+            
+            if (errorDiv && messageSpan) {
+                messageSpan.textContent = message;
+                errorDiv.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    errorDiv.classList.add('hidden');
+                }, 5000);
+            }
+        }
+
+        // Show success message
+        function showSuccess(message) {
+            const errorDiv = document.getElementById('loginError');
+            const successDiv = document.getElementById('loginSuccess');
+            const messageSpan = document.getElementById('loginSuccessMessage');
+            
+            if (errorDiv) errorDiv.classList.add('hidden');
+            
+            if (successDiv && messageSpan) {
+                messageSpan.textContent = message;
+                successDiv.classList.remove('hidden');
+            }
+        }
+
+        // Handle login
+        async function handleLogin(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+            const loginBtn = document.getElementById('loginBtn');
+            
+            if (!email || !password) {
+                showError('Vui lòng nhập đầy đủ thông tin');
+                return;
+            }
+            
+            // Show loading
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Đang xử lý...';
+            
+            try {
+                const result = await login(email, password, rememberMe);
+                
+                if (result && result.success) {
+                    showSuccess('Đăng nhập thành công! Đang chuyển hướng...');
+                    
+                    setTimeout(() => {
+                        const userData = getCurrentUser();
+                        if (userData && userData.role === 'admin') {
+                            window.location.href = 'admin/admin-stats.html';
+                        } else if (userData && userData.role === 'staff') {
+                            window.location.href = 'admin/staff-pos.html';
+                        } else {
+                            window.location.href = 'index.html';
+                        }
+                    }, 1000);
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showError(error.message || 'Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin.');
+                
+                loginBtn.disabled = false;
+                loginBtn.innerHTML = '<i class="fas fa-sign-in-alt mr-2"></i>Đăng nhập';
+            }
+        }
+
+        // Check if already logged in
+        if (typeof isLoggedIn === 'function' && isLoggedIn()) {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

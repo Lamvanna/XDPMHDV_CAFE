@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Bàn - Coffee House Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <div class="fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-amber-900 to-amber-800 text-white shadow-2xl z-50">
+        <div class="p-6 border-b border-amber-700">
+            <h1 class="text-2xl font-bold flex items-center"><i class="fas fa-coffee mr-3"></i>Coffee Admin</h1>
+        </div>
+        <nav class="mt-6">
+            <a href="admin-stats.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors"><i class="fas fa-chart-line w-6"></i><span>Dashboard</span></a>
+            <a href="admin-products.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors"><i class="fas fa-coffee w-6"></i><span>Sản phẩm</span></a>
+            <a href="admin-orders.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors"><i class="fas fa-shopping-cart w-6"></i><span>Đơn hàng</span></a>
+            <a href="admin-promotions.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors"><i class="fas fa-tag w-6"></i><span>Khuyến mãi</span></a>
+            <a href="admin-tables.html" class="flex items-center px-6 py-3 bg-amber-700 border-l-4 border-white"><i class="fas fa-chair w-6"></i><span>Quản lý bàn</span></a>
+            <a href="admin-staff.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors"><i class="fas fa-user-tie w-6"></i><span>Nhân viên</span></a>
+            <a href="admin-users.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors"><i class="fas fa-users-cog w-6"></i><span>Khách hàng</span></a>
+            <a href="admin-inventory.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors"><i class="fas fa-warehouse w-6"></i><span>Kho hàng</span></a>
+            <a href="admin-contacts.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors"><i class="fas fa-envelope-open-text w-6"></i><span>Tin nhắn liên hệ</span></a>
+            <a href="admin-settings.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors"><i class="fas fa-cog w-6"></i><span>Cài đặt</span></a>
+            <a href="../index.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors mt-4 border-t border-amber-700"><i class="fas fa-home w-6"></i><span>Về trang chủ</span></a>
+            <a href="#" onclick="handleLogout()" class="flex items-center px-6 py-3 hover:bg-red-700 transition-colors"><i class="fas fa-sign-out-alt w-6"></i><span>Đăng xuất</span></a>
+        </nav>
+    </div>
+
+    <div class="ml-64 p-8">
+        <div class="flex justify-between items-center mb-8">
+            <div><h2 class="text-3xl font-bold text-gray-800">Quản lý Bàn & Đặt chỗ</h2><p class="text-gray-600 mt-2">Quản lý bàn ăn và đặt chỗ khách hàng</p></div>
+            <button onclick="openAddTableModal()" class="bg-amber-600 hover:bg-amber-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg"><i class="fas fa-plus mr-2"></i>Thêm bàn</button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+            <div class="bg-white rounded-xl shadow p-4">
+                <div class="flex items-center"><div class="p-3 bg-green-100 rounded-lg"><i class="fas fa-check-circle text-green-600 text-2xl"></i></div><div class="ml-4"><p class="text-gray-500 text-sm">Bàn trống</p><p class="text-2xl font-bold" id="availableCount">0</p></div></div>
+            </div>
+            <div class="bg-white rounded-xl shadow p-4">
+                <div class="flex items-center"><div class="p-3 bg-red-100 rounded-lg"><i class="fas fa-user text-red-600 text-2xl"></i></div><div class="ml-4"><p class="text-gray-500 text-sm">Đang sử dụng</p><p class="text-2xl font-bold" id="occupiedCount">0</p></div></div>
+            </div>
+            <div class="bg-white rounded-xl shadow p-4">
+                <div class="flex items-center"><div class="p-3 bg-yellow-100 rounded-lg"><i class="fas fa-bookmark text-yellow-600 text-2xl"></i></div><div class="ml-4"><p class="text-gray-500 text-sm">Đã đặt</p><p class="text-2xl font-bold" id="reservedCount">0</p></div></div>
+            </div>
+            <div class="bg-white rounded-xl shadow p-4">
+                <div class="flex items-center"><div class="p-3 bg-blue-100 rounded-lg"><i class="fas fa-chair text-blue-600 text-2xl"></i></div><div class="ml-4"><p class="text-gray-500 text-sm">Tổng bàn</p><p class="text-2xl font-bold" id="totalCount">0</p></div></div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <h3 class="text-xl font-bold mb-4">Sơ đồ bàn</h3>
+            <div id="tablesGrid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <div class="text-center text-gray-400 py-8 col-span-full"><i class="fas fa-spinner fa-spin text-3xl mb-2"></i><p>Đang tải...</p></div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg p-6 mt-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold">Danh sách đặt chỗ</h3>
+                <div class="flex gap-2">
+                    <button onclick="filterReservations('today')" id="btnToday" class="px-4 py-2 rounded-lg bg-blue-500 text-white font-medium hover:bg-blue-600 transition">Hôm nay</button>
+                    <button onclick="filterReservations('upcoming')" id="btnUpcoming" class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 font-medium hover:bg-gray-300 transition">Sắp tới</button>
+                    <button onclick="filterReservations('all')" id="btnAll" class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 font-medium hover:bg-gray-300 transition">Tất cả</button>
+                </div>
+            </div>
+            <div id="reservationsList" class="space-y-3">
+                <div class="text-center text-gray-400 py-8"><i class="fas fa-spinner fa-spin text-3xl mb-2"></i><p>Đang tải...</p></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tableModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b"><h3 class="text-2xl font-bold" id="modalTitle">Thêm bàn</h3></div>
+            <form id="tableForm" class="p-6 space-y-4">
+                <input type="hidden" id="tableId">
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2">Số bàn *</label>
+                    <input type="number" id="tableNumber" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2">Sức chứa *</label>
+                    <input type="number" id="capacity" required min="1" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2">Khu vực *</label>
+                    <select id="location" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent">
+                        <option value="indoor">Trong nhà</option>
+                        <option value="outdoor">Ngoài trời</option>
+                        <option value="private">Phòng riêng</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2">Hình ảnh bàn</label>
+                    <div class="space-y-3">
+                        <!-- Image Preview -->
+                        <div id="imagePreview" class="hidden">
+                            <img id="previewImg" src="" alt="Preview" class="w-full h-48 object-cover rounded-lg border-2 border-gray-200">
+                            <button type="button" onclick="removeTableImage()" class="mt-2 text-sm text-red-600 hover:text-red-700">
+                                <i class="fas fa-times mr-1"></i>Xóa hình
+                            </button>
+                        </div>
+                        
+                        <!-- Upload Options -->
+                        <div id="uploadOptions" class="space-y-2">
+                            <label class="flex items-center justify-center w-full px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-amber-500 hover:bg-amber-50 transition">
+                                <input type="file" id="tableImageFile" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
+                                <div class="text-center">
+                                    <i class="fas fa-cloud-upload-alt text-2xl text-gray-400 mb-1"></i>
+                                    <p class="text-sm text-gray-600">Upload từ máy tính</p>
+                                </div>
+                            </label>
+                            
+                            <div class="text-center text-xs text-gray-500">hoặc</div>
+                            
+                            <input type="url" id="tableImageUrl" placeholder="Nhập URL hình ảnh" 
+                                   class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm"
+                                   onchange="handleImageUrlChange(event)">
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">Kích thước đề xuất: 400x300px, định dạng: JPG, PNG</p>
+                </div>
+                
+                <div class="flex justify-end space-x-3 pt-4 border-t">
+                    <button type="button" onclick="closeTableModal()" class="px-6 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-lg transition">Hủy</button>
+                    <button type="submit" class="px-6 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg transition">
+                        <i class="fas fa-save mr-2"></i>Lưu
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script src="../assets/js/notification-manager.js"></script>
+    <script src="../assets/js/admin/permissions.js"></script>
+    <script src="../assets/js/admin/admin-utils.js"></script>
+    <script src="../assets/js/admin/tables.js"></script>
+</body>
+</html>
