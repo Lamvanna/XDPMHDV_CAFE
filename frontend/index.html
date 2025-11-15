@@ -35,12 +35,13 @@
             <div class="flex items-center justify-between">
                 <!-- Logo -->
                 <a href="index.html" class="flex items-center space-x-3 cursor-pointer hover:opacity-80 transition-opacity">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-coffee rounded-full flex items-center justify-center">
-                        <i class="fas fa-coffee text-white text-lg sm:text-xl"></i>
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-coffee rounded-full flex items-center justify-center overflow-hidden shop-logo-container">
+                        <i class="fas fa-coffee text-white text-lg sm:text-xl shop-logo-icon"></i>
+                        <img src="" alt="Logo" class="shop-logo w-full h-full object-cover hidden">
                     </div>
                     <div>
-                        <h1 class="text-xl sm:text-2xl font-bold text-coffee">Coffee House</h1>
-                        <p class="text-xs text-gray-600 hidden sm:block">Premium Coffee Experience</p>
+                        <h1 class="text-xl sm:text-2xl font-bold text-coffee shop-name">Coffee Na</h1>
+                        <p class="text-xs text-gray-600 hidden sm:block shop-description">Premium Coffee Experience</p>
                     </div>
                 </a>
 
@@ -367,8 +368,8 @@
                             <i class="fas fa-coffee text-coffee text-xl"></i>
                         </div>
                         <div>
-                            <h3 class="text-2xl font-bold">Coffee House</h3>
-                            <p class="text-sm opacity-80">Premium Coffee Experience</p>
+                            <h3 class="text-2xl font-bold shop-name">Coffee House</h3>
+                            <p class="text-sm opacity-80 shop-description">Premium Coffee Experience</p>
                         </div>
                     </div>
                     <p class="text-gray-300 mb-6 leading-relaxed">
@@ -485,37 +486,13 @@
     <script src="assets/js/auth.js"></script>
     
     <!-- Page-specific scripts -->
+    <script src="assets/js/settings-loader.js"></script>
     <script src="assets/js/home.js"></script>
     <script src="assets/js/user-menu.js"></script>
 
-    <!-- Load Shop Settings -->
+    <!-- Shop Status Script -->
     <script>
-        // Load shop settings from admin panel
-        function loadShopSettings() {
-            const settings = localStorage.getItem('shopSettings');
-            if (settings) {
-                try {
-                    const shopData = JSON.parse(settings);
-                    
-                    // Update shop name in header
-                    const shopNameElements = document.querySelectorAll('h1');
-                    shopNameElements.forEach(el => {
-                        if (el.textContent.trim() === 'Coffee House') {
-                            el.textContent = shopData.name || 'Coffee House';
-                        }
-                    });
-                    
-                    // Update footer contact info
-                    updateFooterInfo(shopData);
-                    
-                    console.log('Shop settings loaded successfully');
-                } catch (error) {
-                    console.error('Error loading shop settings:', error);
-                }
-            }
-        }
-
-        // Update footer contact information
+        // Update footer contact information (kept for backward compatibility)
         function updateFooterInfo(shopData) {
             // Update address
             const addressDiv = document.querySelector('.fa-map-marker-alt')?.parentElement?.parentElement;

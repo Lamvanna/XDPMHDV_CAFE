@@ -33,12 +33,13 @@
             <div class="flex items-center justify-between">
                 <!-- Logo -->
                 <a href="index.html" class="flex items-center space-x-3 cursor-pointer hover:opacity-80 transition-opacity">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-coffee rounded-full flex items-center justify-center">
-                        <i class="fas fa-coffee text-white text-lg sm:text-xl"></i>
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-coffee rounded-full flex items-center justify-center overflow-hidden shop-logo-container">
+                        <i class="fas fa-coffee text-white text-lg sm:text-xl shop-logo-icon"></i>
+                        <img src="" alt="Logo" class="shop-logo w-full h-full object-cover hidden">
                     </div>
                     <div>
-                        <h1 class="text-xl sm:text-2xl font-bold text-coffee">Coffee House</h1>
-                        <p class="text-xs text-gray-600 hidden sm:block">Premium Coffee Experience</p>
+                        <h1 class="text-xl sm:text-2xl font-bold text-coffee shop-name">Coffee House</h1>
+                        <p class="text-xs text-gray-600 hidden sm:block shop-description">Premium Coffee Experience</p>
                     </div>
                 </a>
 
@@ -320,6 +321,7 @@
     <script src="assets/js/auth.js"></script>
     
     <!-- Page-specific scripts -->
+    <script src="assets/js/settings-loader.js"></script>
     <script src="assets/js/reservation-history.js"></script>
     <script src="assets/js/user-menu.js"></script>
 </body>

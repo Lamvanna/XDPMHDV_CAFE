@@ -37,7 +37,7 @@ app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
 // Serve uploaded files
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static('frontend/uploads'));
 
 // Routes
 try {
@@ -50,6 +50,8 @@ try {
     app.use('/api/promotions', require('./routes/promotionRoutes'));
     app.use('/api/profile', require('./routes/profileRoutes'));
     app.use('/api/contacts', require('./routes/contactRoutes'));
+    app.use('/api/settings', require('./routes/settingsRoutes'));
+    app.use('/api/upload', require('./routes/uploadRoutes'));
 } catch (error) {
     console.error('❌ Lỗi tải routes:', error);
     process.exit(1);
@@ -69,7 +71,7 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
     console.error('❌ Error handler caught:', err);
     console.error('Stack:', err.stack);
-    res.status(err.status || 500).json({ 
+    res.status(err.status || 500).json({
         error: err.message || 'Something went wrong!',
         ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
     });

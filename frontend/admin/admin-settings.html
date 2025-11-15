@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cài đặt Hệ thống - Coffee House Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <!-- CRITICAL: Permission check BEFORE page loads -->
     <script>
-        (function() {
+        (function () {
             const userStr = localStorage.getItem('user') || sessionStorage.getItem('user');
             if (!userStr) {
                 alert('Vui lòng đăng nhập!');
@@ -31,14 +33,25 @@
         })();
     </script>
     <style>
-        body { font-family: 'Poppins', sans-serif; }
-        .section-card { transition: all 0.3s ease; }
-        .section-card:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .section-card {
+            transition: all 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
+
 <body class="bg-gray-50">
     <!-- Sidebar -->
-    <div class="fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-amber-900 to-amber-800 text-white shadow-2xl z-50 overflow-y-auto">
+    <div
+        class="fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-amber-900 to-amber-800 text-white shadow-2xl z-50 overflow-y-auto">
         <div class="p-6 border-b border-amber-700">
             <h1 class="text-2xl font-bold flex items-center">
                 <i class="fas fa-coffee mr-3"></i>Coffee Admin
@@ -75,7 +88,8 @@
             <a href="admin-settings.html" class="flex items-center px-6 py-3 bg-amber-700 border-l-4 border-white">
                 <i class="fas fa-cog w-6"></i><span>Cài đặt</span>
             </a>
-            <a href="../index.html" class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors mt-4 border-t border-amber-700">
+            <a href="../index.html"
+                class="flex items-center px-6 py-3 hover:bg-amber-700 transition-colors mt-4 border-t border-amber-700">
                 <i class="fas fa-home w-6"></i><span>Về trang chủ</span>
             </a>
             <a href="#" onclick="handleLogout()" class="flex items-center px-6 py-3 hover:bg-red-700 transition-colors">
@@ -103,28 +117,36 @@
                         <i class="fas fa-list mr-2"></i>Danh mục
                     </h3>
                     <div class="space-y-2">
-                        <button onclick="showSection('shop')" data-section="shop" class="nav-btn w-full text-left px-4 py-3 rounded-lg bg-amber-100 text-amber-800 font-medium transition-colors">
+                        <button onclick="showSection('shop')" data-section="shop"
+                            class="nav-btn w-full text-left px-4 py-3 rounded-lg bg-amber-100 text-amber-800 font-medium transition-colors">
                             <i class="fas fa-store mr-3"></i>Thông tin cửa hàng
                         </button>
-                        <button onclick="showSection('hours')" data-section="hours" class="nav-btn w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors">
+                        <button onclick="showSection('hours')" data-section="hours"
+                            class="nav-btn w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors">
                             <i class="fas fa-clock mr-3"></i>Giờ mở cửa
                         </button>
-                        <button onclick="showSection('payment')" data-section="payment" class="nav-btn w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors">
+                        <button onclick="showSection('payment')" data-section="payment"
+                            class="nav-btn w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors">
                             <i class="fas fa-credit-card mr-3"></i>Thanh toán
                         </button>
-                        <button onclick="showSection('notification')" data-section="notification" class="nav-btn w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors">
+                        <button onclick="showSection('notification')" data-section="notification"
+                            class="nav-btn w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors">
                             <i class="fas fa-bell mr-3"></i>Thông báo
                         </button>
-                        <button onclick="showSection('security')" data-section="security" class="nav-btn w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors">
+                        <button onclick="showSection('security')" data-section="security"
+                            class="nav-btn w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors">
                             <i class="fas fa-shield-alt mr-3"></i>Bảo mật
                         </button>
-                        <button onclick="showSection('api')" data-section="api" class="nav-btn w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors">
+                        <button onclick="showSection('api')" data-section="api"
+                            class="nav-btn w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors">
                             <i class="fas fa-plug mr-3"></i>API & Tích hợp
                         </button>
-                        <button onclick="showSection('backup')" data-section="backup" class="nav-btn w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors">
+                        <button onclick="showSection('backup')" data-section="backup"
+                            class="nav-btn w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors">
                             <i class="fas fa-database mr-3"></i>Sao lưu
                         </button>
-                        <a href="admin-contacts.html" class="block w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors">
+                        <a href="admin-contacts.html"
+                            class="block w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors">
                             <i class="fas fa-envelope-open-text mr-3"></i>Tin nhắn liên hệ
                         </a>
                     </div>
@@ -140,70 +162,109 @@
                     </h3>
                     <form id="shopForm" class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Logo Section -->
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-semibold mb-2 text-gray-700">
+                                    <i class="fas fa-image text-amber-600 mr-2"></i>Logo cửa hàng
+                                </label>
+                                <div class="flex items-start space-x-4">
+                                    <!-- Logo Preview -->
+                                    <div class="flex-shrink-0">
+                                        <div id="logoPreview"
+                                            class="w-24 h-24 border-2 border-gray-300 rounded-lg overflow-hidden bg-gray-50 flex items-center justify-center">
+                                            <i class="fas fa-coffee text-4xl text-gray-400"></i>
+                                        </div>
+                                    </div>
+                                    <!-- Logo Input -->
+                                    <div class="flex-1">
+                                        <input type="text" id="shopLogo" placeholder="https://example.com/logo.png hoặc /uploads/logo.png"
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 transition-all mb-2">
+                                        
+                                        <!-- File Upload -->
+                                        <div class="flex items-center space-x-2 mb-2">
+                                            <input type="file" id="logoFile" accept="image/*" class="hidden">
+                                            <button type="button" onclick="document.getElementById('logoFile').click()"
+                                                class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white text-sm rounded-lg transition-colors">
+                                                <i class="fas fa-upload mr-1"></i>Upload từ máy
+                                            </button>
+                                            <button type="button" onclick="previewLogo()"
+                                                class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-lg transition-colors">
+                                                <i class="fas fa-eye mr-1"></i>Xem trước
+                                            </button>
+                                        </div>
+                                        
+                                        <p class="text-xs text-gray-500">
+                                            <i class="fas fa-info-circle mr-1"></i>
+                                            Upload file từ máy hoặc nhập URL ảnh. Kích thước tối đa: 5MB
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="md:col-span-2">
                                 <label class="block text-sm font-semibold mb-2 text-gray-700">
                                     <i class="fas fa-signature text-amber-600 mr-2"></i>Tên cửa hàng
                                 </label>
-                                <input type="text" id="shopName" value="Coffee House" 
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 transition-all">
+                                <input type="text" id="shopName" value="Coffee House"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 transition-all">
                             </div>
-                            
+
                             <div class="md:col-span-2">
                                 <label class="block text-sm font-semibold mb-2 text-gray-700">
                                     <i class="fas fa-map-marker-alt text-amber-600 mr-2"></i>Địa chỉ
                                 </label>
-                                <input type="text" id="shopAddress" value="123 Nguyễn Huệ, Quận 1, TP.HCM" 
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 transition-all">
+                                <input type="text" id="shopAddress" value="123 Nguyễn Huệ, Quận 1, TP.HCM"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 transition-all">
                             </div>
-                            
+
                             <div>
                                 <label class="block text-sm font-semibold mb-2 text-gray-700">
                                     <i class="fas fa-phone text-amber-600 mr-2"></i>Số điện thoại
                                 </label>
-                                <input type="tel" id="shopPhone" value="0901234567" 
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 transition-all">
+                                <input type="tel" id="shopPhone" value="0901234567"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 transition-all">
                             </div>
-                            
+
                             <div>
                                 <label class="block text-sm font-semibold mb-2 text-gray-700">
                                     <i class="fas fa-envelope text-amber-600 mr-2"></i>Email
                                 </label>
-                                <input type="email" id="shopEmail" value="info@coffeehouse.vn" 
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 transition-all">
+                                <input type="email" id="shopEmail" value="info@coffeehouse.vn"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 transition-all">
                             </div>
-                            
+
                             <div>
                                 <label class="block text-sm font-semibold mb-2 text-gray-700">
                                     <i class="fas fa-globe text-amber-600 mr-2"></i>Website
                                 </label>
-                                <input type="url" id="shopWebsite" value="https://coffeehouse.vn" 
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 transition-all">
+                                <input type="url" id="shopWebsite" value="https://coffeehouse.vn"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 transition-all">
                             </div>
-                            
+
                             <div>
                                 <label class="block text-sm font-semibold mb-2 text-gray-700">
                                     <i class="fab fa-facebook text-amber-600 mr-2"></i>Facebook
                                 </label>
-                                <input type="url" id="shopFacebook" value="https://facebook.com/coffeehouse" 
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 transition-all">
+                                <input type="url" id="shopFacebook" value="https://facebook.com/coffeehouse"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 transition-all">
                             </div>
-                            
+
                             <div class="md:col-span-2">
                                 <label class="block text-sm font-semibold mb-2 text-gray-700">
                                     <i class="fas fa-info-circle text-amber-600 mr-2"></i>Mô tả
                                 </label>
-                                <textarea id="shopDesc" rows="4" 
-                                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 transition-all">Cà phê ngon, không gian đẹp, phục vụ tận tâm. Mang đến trải nghiệm tuyệt vời cho mọi khách hàng.</textarea>
+                                <textarea id="shopDesc" rows="4"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 transition-all">Cà phê ngon, không gian đẹp, phục vụ tận tâm. Mang đến trải nghiệm tuyệt vời cho mọi khách hàng.</textarea>
                             </div>
                         </div>
-                        
+
                         <div class="flex justify-end space-x-4 pt-4">
-                            <button type="button" onclick="resetForm('shopForm')" 
-                                    class="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                            <button type="button" onclick="resetForm('shopForm')"
+                                class="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
                                 <i class="fas fa-undo mr-2"></i>Đặt lại
                             </button>
-                            <button type="submit" 
-                                    class="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all">
+                            <button type="submit"
+                                class="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all">
                                 <i class="fas fa-save mr-2"></i>Lưu thay đổi
                             </button>
                         </div>
@@ -216,63 +277,75 @@
                         <h3 class="text-2xl font-bold mb-6 flex items-center">
                             <i class="fas fa-clock text-amber-600 mr-3"></i>Giờ mở cửa
                         </h3>
-                        
+
                         <form id="hoursForm" class="space-y-4">
                             <!-- Monday to Friday -->
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 border border-gray-200 rounded-lg hover:border-amber-500 transition-colors">
+                            <div
+                                class="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 border border-gray-200 rounded-lg hover:border-amber-500 transition-colors">
                                 <div class="flex items-center">
-                                    <input type="checkbox" id="mon-fri" checked class="w-5 h-5 text-amber-600 rounded mr-3">
+                                    <input type="checkbox" id="mon-fri" checked
+                                        class="w-5 h-5 text-amber-600 rounded mr-3">
                                     <label for="mon-fri" class="font-semibold text-gray-800">Thứ 2 - Thứ 6</label>
                                 </div>
                                 <div>
                                     <label class="block text-sm text-gray-600 mb-1">Giờ mở cửa</label>
-                                    <input type="time" value="07:00" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
+                                    <input type="time" value="07:00"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
                                 </div>
                                 <div>
                                     <label class="block text-sm text-gray-600 mb-1">Giờ đóng cửa</label>
-                                    <input type="time" value="22:00" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
+                                    <input type="time" value="22:00"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
                                 </div>
                             </div>
 
                             <!-- Saturday -->
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 border border-gray-200 rounded-lg hover:border-amber-500 transition-colors">
+                            <div
+                                class="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 border border-gray-200 rounded-lg hover:border-amber-500 transition-colors">
                                 <div class="flex items-center">
-                                    <input type="checkbox" id="saturday" checked class="w-5 h-5 text-amber-600 rounded mr-3">
+                                    <input type="checkbox" id="saturday" checked
+                                        class="w-5 h-5 text-amber-600 rounded mr-3">
                                     <label for="saturday" class="font-semibold text-gray-800">Thứ 7</label>
                                 </div>
                                 <div>
                                     <label class="block text-sm text-gray-600 mb-1">Giờ mở cửa</label>
-                                    <input type="time" value="08:00" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
+                                    <input type="time" value="08:00"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
                                 </div>
                                 <div>
                                     <label class="block text-sm text-gray-600 mb-1">Giờ đóng cửa</label>
-                                    <input type="time" value="23:00" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
+                                    <input type="time" value="23:00"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
                                 </div>
                             </div>
 
                             <!-- Sunday -->
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 border border-gray-200 rounded-lg hover:border-amber-500 transition-colors">
+                            <div
+                                class="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 border border-gray-200 rounded-lg hover:border-amber-500 transition-colors">
                                 <div class="flex items-center">
-                                    <input type="checkbox" id="sunday" checked class="w-5 h-5 text-amber-600 rounded mr-3">
+                                    <input type="checkbox" id="sunday" checked
+                                        class="w-5 h-5 text-amber-600 rounded mr-3">
                                     <label for="sunday" class="font-semibold text-gray-800">Chủ nhật</label>
                                 </div>
                                 <div>
                                     <label class="block text-sm text-gray-600 mb-1">Giờ mở cửa</label>
-                                    <input type="time" value="08:00" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
+                                    <input type="time" value="08:00"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
                                 </div>
                                 <div>
                                     <label class="block text-sm text-gray-600 mb-1">Giờ đóng cửa</label>
-                                    <input type="time" value="23:00" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
+                                    <input type="time" value="23:00"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
                                 </div>
                             </div>
 
                             <div class="flex justify-end space-x-4 pt-4 border-t">
-                                <button type="button" onclick="resetForm('hoursForm')" 
-                                        class="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                                <button type="button" onclick="resetForm('hoursForm')"
+                                    class="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
                                     <i class="fas fa-undo mr-2"></i>Đặt lại
                                 </button>
-                                <button type="submit" 
-                                        class="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all">
+                                <button type="submit"
+                                    class="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all">
                                     <i class="fas fa-save mr-2"></i>Lưu thay đổi
                                 </button>
                             </div>
@@ -286,7 +359,7 @@
                         <h3 class="text-2xl font-bold mb-6 flex items-center">
                             <i class="fas fa-credit-card text-amber-600 mr-3"></i>Phương thức thanh toán
                         </h3>
-                        
+
                         <div class="space-y-6">
                             <!-- Cash Payment -->
                             <div class="border border-gray-200 rounded-lg p-6 hover:border-amber-500 transition-colors">
@@ -300,7 +373,9 @@
                                     </div>
                                     <label class="relative inline-flex items-center cursor-pointer">
                                         <input type="checkbox" checked class="sr-only peer">
-                                        <div class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
+                                        <div
+                                            class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600">
+                                        </div>
                                     </label>
                                 </div>
                             </div>
@@ -317,22 +392,27 @@
                                     </div>
                                     <label class="relative inline-flex items-center cursor-pointer">
                                         <input type="checkbox" checked class="sr-only peer">
-                                        <div class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
+                                        <div
+                                            class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600">
+                                        </div>
                                     </label>
                                 </div>
                                 <div class="mt-4 p-4 bg-gray-50 rounded-lg">
                                     <div class="grid grid-cols-2 gap-4 text-sm">
                                         <div>
                                             <label class="block text-gray-600 mb-1">Ngân hàng</label>
-                                            <input type="text" value="Vietcombank" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                                            <input type="text" value="Vietcombank"
+                                                class="w-full px-3 py-2 border border-gray-300 rounded-lg">
                                         </div>
                                         <div>
                                             <label class="block text-gray-600 mb-1">Số tài khoản</label>
-                                            <input type="text" value="1234567890" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                                            <input type="text" value="1234567890"
+                                                class="w-full px-3 py-2 border border-gray-300 rounded-lg">
                                         </div>
                                         <div class="col-span-2">
                                             <label class="block text-gray-600 mb-1">Chủ tài khoản</label>
-                                            <input type="text" value="COFFEE HOUSE CO., LTD" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                                            <input type="text" value="COFFEE HOUSE CO., LTD"
+                                                class="w-full px-3 py-2 border border-gray-300 rounded-lg">
                                         </div>
                                     </div>
                                 </div>
@@ -350,7 +430,9 @@
                                     </div>
                                     <label class="relative inline-flex items-center cursor-pointer">
                                         <input type="checkbox" checked class="sr-only peer">
-                                        <div class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
+                                        <div
+                                            class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600">
+                                        </div>
                                     </label>
                                 </div>
                             </div>
@@ -367,14 +449,16 @@
                                     </div>
                                     <label class="relative inline-flex items-center cursor-pointer">
                                         <input type="checkbox" class="sr-only peer">
-                                        <div class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
+                                        <div
+                                            class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600">
+                                        </div>
                                     </label>
                                 </div>
                             </div>
 
                             <div class="flex justify-end pt-4 border-t">
-                                <button onclick="savePaymentSettings()" 
-                                        class="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all">
+                                <button onclick="savePaymentSettings()"
+                                    class="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all">
                                     <i class="fas fa-save mr-2"></i>Lưu cài đặt
                                 </button>
                             </div>
@@ -388,7 +472,7 @@
                         <h3 class="text-2xl font-bold mb-6 flex items-center">
                             <i class="fas fa-bell text-amber-600 mr-3"></i>Cài đặt thông báo
                         </h3>
-                        
+
                         <div class="space-y-4">
                             <!-- Order Notifications -->
                             <div class="p-6 border border-gray-200 rounded-lg hover:border-amber-500 transition-colors">
@@ -402,7 +486,9 @@
                                     </div>
                                     <label class="relative inline-flex items-center cursor-pointer">
                                         <input type="checkbox" checked class="sr-only peer">
-                                        <div class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
+                                        <div
+                                            class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600">
+                                        </div>
                                     </label>
                                 </div>
                                 <div class="flex gap-4">
@@ -433,12 +519,15 @@
                                     </div>
                                     <label class="relative inline-flex items-center cursor-pointer">
                                         <input type="checkbox" checked class="sr-only peer">
-                                        <div class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
+                                        <div
+                                            class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600">
+                                        </div>
                                     </label>
                                 </div>
                                 <div>
                                     <label class="text-sm text-gray-600">Ngưỡng cảnh báo (số lượng):</label>
-                                    <input type="number" value="10" class="mt-2 w-32 px-3 py-2 border border-gray-300 rounded-lg">
+                                    <input type="number" value="10"
+                                        class="mt-2 w-32 px-3 py-2 border border-gray-300 rounded-lg">
                                 </div>
                             </div>
 
@@ -454,7 +543,9 @@
                                     </div>
                                     <label class="relative inline-flex items-center cursor-pointer">
                                         <input type="checkbox" checked class="sr-only peer">
-                                        <div class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
+                                        <div
+                                            class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600">
+                                        </div>
                                     </label>
                                 </div>
                             </div>
@@ -467,18 +558,21 @@
                                             <i class="fas fa-chart-line text-amber-600 mr-2"></i>
                                             Báo cáo hàng ngày
                                         </h4>
-                                        <p class="text-sm text-gray-600 mt-1">Gửi báo cáo doanh thu hàng ngày qua email</p>
+                                        <p class="text-sm text-gray-600 mt-1">Gửi báo cáo doanh thu hàng ngày qua email
+                                        </p>
                                     </div>
                                     <label class="relative inline-flex items-center cursor-pointer">
                                         <input type="checkbox" checked class="sr-only peer">
-                                        <div class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
+                                        <div
+                                            class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600">
+                                        </div>
                                     </label>
                                 </div>
                             </div>
 
                             <div class="flex justify-end pt-4 border-t">
-                                <button onclick="saveNotificationSettings()" 
-                                        class="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all">
+                                <button onclick="saveNotificationSettings()"
+                                    class="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all">
                                     <i class="fas fa-save mr-2"></i>Lưu cài đặt
                                 </button>
                             </div>
@@ -492,7 +586,7 @@
                         <h3 class="text-2xl font-bold mb-6 flex items-center">
                             <i class="fas fa-shield-alt text-amber-600 mr-3"></i>Bảo mật
                         </h3>
-                        
+
                         <div class="space-y-6">
                             <!-- Change Admin Password -->
                             <div class="p-6 border-2 border-amber-200 rounded-lg bg-amber-50">
@@ -503,17 +597,21 @@
                                 <form id="changePasswordForm" class="space-y-4">
                                     <div>
                                         <label class="block text-sm font-semibold mb-2">Mật khẩu hiện tại</label>
-                                        <input type="password" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
+                                        <input type="password" required
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
                                     </div>
                                     <div>
                                         <label class="block text-sm font-semibold mb-2">Mật khẩu mới</label>
-                                        <input type="password" required minlength="6" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
+                                        <input type="password" required minlength="6"
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
                                     </div>
                                     <div>
                                         <label class="block text-sm font-semibold mb-2">Xác nhận mật khẩu mới</label>
-                                        <input type="password" required minlength="6" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
+                                        <input type="password" required minlength="6"
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500">
                                     </div>
-                                    <button type="submit" class="w-full bg-amber-600 hover:bg-amber-700 text-white py-3 rounded-lg font-semibold">
+                                    <button type="submit"
+                                        class="w-full bg-amber-600 hover:bg-amber-700 text-white py-3 rounded-lg font-semibold">
                                         <i class="fas fa-check mr-2"></i>Đổi mật khẩu
                                     </button>
                                 </form>
@@ -529,7 +627,8 @@
                                         </h4>
                                         <p class="text-sm text-gray-600 mt-1">Tăng cường bảo mật tài khoản admin</p>
                                     </div>
-                                    <button class="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold">
+                                    <button
+                                        class="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold">
                                         Bật ngay
                                     </button>
                                 </div>
@@ -544,13 +643,16 @@
                                 <div class="space-y-3">
                                     <div class="flex items-center justify-between">
                                         <span class="text-gray-700">Thời gian hết hạn phiên (phút)</span>
-                                        <input type="number" value="60" class="w-24 px-3 py-2 border border-gray-300 rounded-lg text-center">
+                                        <input type="number" value="60"
+                                            class="w-24 px-3 py-2 border border-gray-300 rounded-lg text-center">
                                     </div>
                                     <div class="flex items-center justify-between">
                                         <span class="text-gray-700">Tự động đăng xuất khi không hoạt động</span>
                                         <label class="relative inline-flex items-center cursor-pointer">
                                             <input type="checkbox" checked class="sr-only peer">
-                                            <div class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
+                                            <div
+                                                class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600">
+                                            </div>
                                         </label>
                                     </div>
                                 </div>
@@ -580,8 +682,8 @@
                             </div>
 
                             <div class="flex justify-end pt-4 border-t">
-                                <button onclick="saveSecuritySettings()" 
-                                        class="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all">
+                                <button onclick="saveSecuritySettings()"
+                                    class="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all">
                                     <i class="fas fa-save mr-2"></i>Lưu cài đặt
                                 </button>
                             </div>
@@ -595,7 +697,7 @@
                         <h3 class="text-2xl font-bold mb-6 flex items-center">
                             <i class="fas fa-plug text-amber-600 mr-3"></i>API & Tích hợp
                         </h3>
-                        
+
                         <div class="space-y-6">
                             <!-- API Keys -->
                             <div class="p-6 border-2 border-blue-200 rounded-lg bg-blue-50">
@@ -607,8 +709,10 @@
                                     <div>
                                         <label class="block text-sm font-semibold mb-2">Public Key</label>
                                         <div class="flex gap-2">
-                                            <input type="text" readonly value="pk_live_xxxxxxxxxxxxxxxxxxxxxxxxxx" class="flex-1 px-4 py-3 bg-white border border-gray-300 rounded-lg font-mono text-sm">
-                                            <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
+                                            <input type="text" readonly value="pk_live_xxxxxxxxxxxxxxxxxxxxxxxxxx"
+                                                class="flex-1 px-4 py-3 bg-white border border-gray-300 rounded-lg font-mono text-sm">
+                                            <button
+                                                class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
                                                 <i class="fas fa-copy"></i>
                                             </button>
                                         </div>
@@ -616,13 +720,16 @@
                                     <div>
                                         <label class="block text-sm font-semibold mb-2">Secret Key</label>
                                         <div class="flex gap-2">
-                                            <input type="password" readonly value="your_stripe_secret_key_here" class="flex-1 px-4 py-3 bg-white border border-gray-300 rounded-lg font-mono text-sm">
-                                            <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
+                                            <input type="password" readonly value="your_stripe_secret_key_here"
+                                                class="flex-1 px-4 py-3 bg-white border border-gray-300 rounded-lg font-mono text-sm">
+                                            <button
+                                                class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
                                                 <i class="fas fa-eye"></i>
                                             </button>
                                         </div>
                                     </div>
-                                    <button class="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-lg font-semibold">
+                                    <button
+                                        class="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-lg font-semibold">
                                         <i class="fas fa-sync mr-2"></i>Tạo lại API Keys
                                     </button>
                                 </div>
@@ -637,7 +744,8 @@
                                 <div class="space-y-4">
                                     <div>
                                         <label class="block text-sm font-semibold mb-2">URL nhận webhook</label>
-                                        <input type="url" placeholder="https://your-domain.com/webhook" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                                        <input type="url" placeholder="https://your-domain.com/webhook"
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg">
                                     </div>
                                     <div>
                                         <label class="block text-sm font-semibold mb-2">Sự kiện</label>
@@ -671,58 +779,74 @@
                                 </h4>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <!-- Google Analytics -->
-                                    <div class="p-4 border border-gray-200 rounded-lg hover:border-amber-500 transition-colors">
+                                    <div
+                                        class="p-4 border border-gray-200 rounded-lg hover:border-amber-500 transition-colors">
                                         <div class="flex items-center justify-between mb-2">
                                             <h5 class="font-semibold">Google Analytics</h5>
                                             <label class="relative inline-flex items-center cursor-pointer">
                                                 <input type="checkbox" checked class="sr-only peer">
-                                                <div class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
+                                                <div
+                                                    class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600">
+                                                </div>
                                             </label>
                                         </div>
-                                        <input type="text" placeholder="UA-XXXXXXXXX-X" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                                        <input type="text" placeholder="UA-XXXXXXXXX-X"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
                                     </div>
 
                                     <!-- Facebook Pixel -->
-                                    <div class="p-4 border border-gray-200 rounded-lg hover:border-amber-500 transition-colors">
+                                    <div
+                                        class="p-4 border border-gray-200 rounded-lg hover:border-amber-500 transition-colors">
                                         <div class="flex items-center justify-between mb-2">
                                             <h5 class="font-semibold">Facebook Pixel</h5>
                                             <label class="relative inline-flex items-center cursor-pointer">
                                                 <input type="checkbox" class="sr-only peer">
-                                                <div class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
+                                                <div
+                                                    class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600">
+                                                </div>
                                             </label>
                                         </div>
-                                        <input type="text" placeholder="Pixel ID" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                                        <input type="text" placeholder="Pixel ID"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
                                     </div>
 
                                     <!-- Zalo OA -->
-                                    <div class="p-4 border border-gray-200 rounded-lg hover:border-amber-500 transition-colors">
+                                    <div
+                                        class="p-4 border border-gray-200 rounded-lg hover:border-amber-500 transition-colors">
                                         <div class="flex items-center justify-between mb-2">
                                             <h5 class="font-semibold">Zalo OA</h5>
                                             <label class="relative inline-flex items-center cursor-pointer">
                                                 <input type="checkbox" class="sr-only peer">
-                                                <div class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
+                                                <div
+                                                    class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600">
+                                                </div>
                                             </label>
                                         </div>
-                                        <input type="text" placeholder="OA ID" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                                        <input type="text" placeholder="OA ID"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
                                     </div>
 
                                     <!-- SMS Gateway -->
-                                    <div class="p-4 border border-gray-200 rounded-lg hover:border-amber-500 transition-colors">
+                                    <div
+                                        class="p-4 border border-gray-200 rounded-lg hover:border-amber-500 transition-colors">
                                         <div class="flex items-center justify-between mb-2">
                                             <h5 class="font-semibold">SMS Gateway</h5>
                                             <label class="relative inline-flex items-center cursor-pointer">
                                                 <input type="checkbox" class="sr-only peer">
-                                                <div class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600"></div>
+                                                <div
+                                                    class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-600">
+                                                </div>
                                             </label>
                                         </div>
-                                        <input type="text" placeholder="API Key" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                                        <input type="text" placeholder="API Key"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
                                     </div>
                                 </div>
                             </div>
 
                             <div class="flex justify-end pt-4 border-t">
-                                <button onclick="saveAPISettings()" 
-                                        class="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all">
+                                <button onclick="saveAPISettings()"
+                                    class="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all">
                                     <i class="fas fa-save mr-2"></i>Lưu cài đặt
                                 </button>
                             </div>
@@ -736,7 +860,7 @@
                         <h3 class="text-2xl font-bold mb-6 flex items-center">
                             <i class="fas fa-database text-amber-600 mr-3"></i>Sao lưu & Khôi phục
                         </h3>
-                        
+
                         <div class="space-y-6">
                             <!-- Auto Backup -->
                             <div class="p-6 border-2 border-green-200 rounded-lg bg-green-50">
@@ -749,7 +873,9 @@
                                         <span class="text-gray-700 font-medium">Bật sao lưu tự động</span>
                                         <label class="relative inline-flex items-center cursor-pointer">
                                             <input type="checkbox" checked class="sr-only peer">
-                                            <div class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+                                            <div
+                                                class="w-11 h-6 bg-gray-300 peer-focus:ring-4 peer-focus:ring-amber-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600">
+                                            </div>
                                         </label>
                                     </div>
                                     <div>
@@ -778,15 +904,19 @@
                                     <i class="fas fa-download text-amber-600 mr-2"></i>
                                     Sao lưu thủ công
                                 </h4>
-                                <p class="text-gray-600 mb-4">Tạo bản sao lưu ngay lập tức cho toàn bộ dữ liệu hệ thống</p>
+                                <p class="text-gray-600 mb-4">Tạo bản sao lưu ngay lập tức cho toàn bộ dữ liệu hệ thống
+                                </p>
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    <button class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold">
+                                    <button
+                                        class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold">
                                         <i class="fas fa-database mr-2"></i>Sao lưu Database
                                     </button>
-                                    <button class="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-semibold">
+                                    <button
+                                        class="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-semibold">
                                         <i class="fas fa-images mr-2"></i>Sao lưu File
                                     </button>
-                                    <button class="px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold">
+                                    <button
+                                        class="px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold">
                                         <i class="fas fa-archive mr-2"></i>Sao lưu toàn bộ
                                     </button>
                                 </div>
@@ -799,7 +929,8 @@
                                     Lịch sử sao lưu
                                 </h4>
                                 <div class="space-y-2">
-                                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                                    <div
+                                        class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
                                         <div class="flex items-center">
                                             <i class="fas fa-file-archive text-green-600 text-2xl mr-4"></i>
                                             <div>
@@ -808,15 +939,18 @@
                                             </div>
                                         </div>
                                         <div class="flex gap-2">
-                                            <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold">
+                                            <button
+                                                class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold">
                                                 <i class="fas fa-download mr-1"></i>Tải về
                                             </button>
-                                            <button class="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-sm font-semibold">
+                                            <button
+                                                class="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-sm font-semibold">
                                                 <i class="fas fa-undo mr-1"></i>Khôi phục
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                                    <div
+                                        class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
                                         <div class="flex items-center">
                                             <i class="fas fa-file-archive text-gray-600 text-2xl mr-4"></i>
                                             <div>
@@ -825,10 +959,12 @@
                                             </div>
                                         </div>
                                         <div class="flex gap-2">
-                                            <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold">
+                                            <button
+                                                class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-semibold">
                                                 <i class="fas fa-download mr-1"></i>Tải về
                                             </button>
-                                            <button class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-semibold">
+                                            <button
+                                                class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-semibold">
                                                 <i class="fas fa-trash mr-1"></i>Xóa
                                             </button>
                                         </div>
@@ -844,16 +980,18 @@
                                 </h4>
                                 <p class="text-gray-600 mb-4">Tải lên file backup để khôi phục dữ liệu</p>
                                 <div class="flex items-center gap-4">
-                                    <input type="file" accept=".zip" class="flex-1 px-4 py-3 border-2 border-dashed border-orange-300 rounded-lg">
-                                    <button class="px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-semibold">
+                                    <input type="file" accept=".zip"
+                                        class="flex-1 px-4 py-3 border-2 border-dashed border-orange-300 rounded-lg">
+                                    <button
+                                        class="px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-semibold">
                                         <i class="fas fa-undo mr-2"></i>Khôi phục
                                     </button>
                                 </div>
                             </div>
 
                             <div class="flex justify-end pt-4 border-t">
-                                <button onclick="saveBackupSettings()" 
-                                        class="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all">
+                                <button onclick="saveBackupSettings()"
+                                    class="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all">
                                     <i class="fas fa-save mr-2"></i>Lưu cài đặt
                                 </button>
                             </div>
@@ -865,7 +1003,8 @@
     </div>
 
     <!-- Success Notification -->
-    <div id="notification" class="fixed bottom-8 right-8 bg-green-600 text-white px-6 py-4 rounded-lg shadow-2xl transform translate-x-full transition-transform duration-300 z-50 hidden">
+    <div id="notification"
+        class="fixed bottom-8 right-8 bg-green-600 text-white px-6 py-4 rounded-lg shadow-2xl transform translate-x-full transition-transform duration-300 z-50 hidden">
         <div class="flex items-center space-x-3">
             <i class="fas fa-check-circle text-2xl"></i>
             <span id="notificationText" class="font-semibold"></span>
@@ -874,7 +1013,7 @@
 
     <script src="../assets/js/api.js"></script>
     <script src="../assets/js/utils.js"></script>
-    
+
     <script>
         // Section navigation
         function showSection(sectionName) {
@@ -882,19 +1021,19 @@
             document.querySelectorAll('.content-section').forEach(section => {
                 section.classList.add('hidden');
             });
-            
+
             // Remove active class from all nav buttons
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 btn.classList.remove('bg-amber-100', 'text-amber-800', 'font-medium');
                 btn.classList.add('hover:bg-gray-100');
             });
-            
+
             // Show selected section
             const section = document.getElementById(sectionName + 'Section');
             if (section) {
                 section.classList.remove('hidden');
             }
-            
+
             // Highlight active nav button
             const activeBtn = document.querySelector(`[data-section="${sectionName}"]`);
             if (activeBtn) {
@@ -907,12 +1046,12 @@
         function showNotification(message, type = 'success') {
             const notification = document.getElementById('notification');
             const notificationText = document.getElementById('notificationText');
-            
+
             if (!notification || !notificationText) return;
-            
+
             notificationText.textContent = message;
             notification.classList.remove('hidden', 'translate-x-full');
-            
+
             if (type === 'error') {
                 notification.classList.remove('bg-green-600');
                 notification.classList.add('bg-red-600');
@@ -920,7 +1059,7 @@
                 notification.classList.remove('bg-red-600');
                 notification.classList.add('bg-green-600');
             }
-            
+
             setTimeout(() => {
                 notification.classList.add('translate-x-full');
                 setTimeout(() => {
@@ -953,7 +1092,7 @@
                         'shopFacebook': data.facebook,
                         'shopDesc': data.description
                     };
-                    
+
                     Object.keys(fields).forEach(key => {
                         const element = document.getElementById(key);
                         if (element && fields[key]) {
@@ -1048,15 +1187,15 @@
                         facebook: document.getElementById('shopFacebook')?.value || '',
                         description: document.getElementById('shopDesc')?.value || ''
                     };
-                    
+
                     localStorage.setItem('shopSettings', JSON.stringify(formData));
                     showNotification('Đã lưu thông tin cửa hàng!');
-                    
+
                     // Trigger custom event for same tab/window
                     window.dispatchEvent(new CustomEvent('shopSettingsUpdated', {
                         detail: formData
                     }));
-                    
+
                     // Trigger storage event for other tabs/windows
                     window.dispatchEvent(new StorageEvent('storage', {
                         key: 'shopSettings',
@@ -1079,26 +1218,26 @@
             if (passwordForm) {
                 passwordForm.addEventListener('submit', async (e) => {
                     e.preventDefault();
-                    
+
                     const currentPassword = e.target.querySelector('input[type="password"]:nth-of-type(1)')?.value;
                     const newPassword = e.target.querySelector('input[type="password"]:nth-of-type(2)')?.value;
                     const confirmPassword = e.target.querySelector('input[type="password"]:nth-of-type(3)')?.value;
-                    
+
                     if (!currentPassword || !newPassword || !confirmPassword) {
                         showNotification('Vui lòng điền đầy đủ thông tin!', 'error');
                         return;
                     }
-                    
+
                     if (newPassword !== confirmPassword) {
                         showNotification('Mật khẩu mới không khớp!', 'error');
                         return;
                     }
-                    
+
                     if (newPassword.length < 6) {
                         showNotification('Mật khẩu phải có ít nhất 6 ký tự!', 'error');
                         return;
                     }
-                    
+
                     try {
                         const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
                         const response = await fetch('http://localhost:3000/api/users/change-password', {
@@ -1109,7 +1248,7 @@
                             },
                             body: JSON.stringify({ currentPassword, newPassword })
                         });
-                        
+
                         if (response.ok) {
                             showNotification('Đã đổi mật khẩu thành công!');
                             e.target.reset();
@@ -1125,8 +1264,10 @@
             }
         });
     </script>
-    
+
     <!-- Permission Check -->
     <script src="../assets/js/admin/permissions.js"></script>
+    <script src="../assets/js/admin/settings.js"></script>
 </body>
+
 </html>

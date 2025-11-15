@@ -82,9 +82,11 @@ jspm_packages/
 ehthumbs.db
 Thumbs.db
 
-# Uploads (user avatars, etc.)
+# Uploads (user avatars, logos, etc.)
 backend/uploads/avatars/
 uploads/avatars/
+frontend/uploads/*
+!frontend/uploads/.gitkeep
 
 # Temporary files
 *.tmp

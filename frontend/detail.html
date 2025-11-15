@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chi tiết món | Coffee House</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="assets/css/transitions.css">
     <script>
         tailwind.config = {
@@ -26,29 +28,36 @@
         }
     </script>
 </head>
+
 <body class="font-poppins bg-cream">
     <!-- Header (Fixed) -->
     <header class="bg-white shadow-lg fixed top-0 left-0 right-0 z-50">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
             <div class="flex items-center justify-between">
                 <!-- Logo -->
-                <a href="index.html" class="flex items-center space-x-3 cursor-pointer hover:opacity-80 transition-opacity">
-                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-coffee rounded-full flex items-center justify-center">
-                        <i class="fas fa-coffee text-white text-lg sm:text-xl"></i>
+                <a href="index.html"
+                    class="flex items-center space-x-3 cursor-pointer hover:opacity-80 transition-opacity">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-coffee rounded-full flex items-center justify-center overflow-hidden shop-logo-container">
+                        <i class="fas fa-coffee text-white text-lg sm:text-xl shop-logo-icon"></i>
+                        <img src="" alt="Logo" class="shop-logo w-full h-full object-cover hidden">
                     </div>
                     <div>
-                        <h1 class="text-xl sm:text-2xl font-bold text-coffee">Coffee House</h1>
-                        <p class="text-xs text-gray-600 hidden sm:block">Premium Coffee Experience</p>
+                        <h1 class="text-xl sm:text-2xl font-bold text-coffee shop-name">Coffee House</h1>
+                        <p class="text-xs text-gray-600 hidden sm:block shop-description">Premium Coffee Experience</p>
                     </div>
                 </a>
 
                 <!-- Navigation Menu -->
                 <nav class="hidden lg:flex items-center space-x-8">
-                    <a href="index.html" class="nav-link text-gray-700 hover:text-coffee transition-colors">Trang chủ</a>
+                    <a href="index.html" class="nav-link text-gray-700 hover:text-coffee transition-colors">Trang
+                        chủ</a>
                     <a href="menu.html" class="nav-link text-gray-700 hover:text-coffee transition-colors">Menu</a>
-                    <a href="reservation.html" class="nav-link text-gray-700 hover:text-coffee transition-colors">Đặt bàn</a>
-                    <a href="promotion.html" class="nav-link text-gray-700 hover:text-coffee transition-colors">Khuyến mãi</a>
-                    <a href="contact.html" class="nav-link text-gray-700 hover:text-coffee transition-colors">Liên hệ</a>
+                    <a href="reservation.html" class="nav-link text-gray-700 hover:text-coffee transition-colors">Đặt
+                        bàn</a>
+                    <a href="promotion.html" class="nav-link text-gray-700 hover:text-coffee transition-colors">Khuyến
+                        mãi</a>
+                    <a href="contact.html" class="nav-link text-gray-700 hover:text-coffee transition-colors">Liên
+                        hệ</a>
                 </nav>
 
                 <!-- Search Bar -->
@@ -61,40 +70,50 @@
                 <div class="flex items-center space-x-2 sm:space-x-4">
                     <!-- Cart -->
                     <div class="relative">
-                        <a href="cart.html" class="p-2 bg-coffee text-white rounded-full hover:bg-coffee-dark transition-colors inline-block">
+                        <a href="cart.html"
+                            class="p-2 bg-coffee text-white rounded-full hover:bg-coffee-dark transition-colors inline-block">
                             <i class="fas fa-shopping-cart text-sm sm:text-base"></i>
                         </a>
-                        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center" id="cartCount">0</span>
+                        <span
+                            class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
+                            id="cartCount">0</span>
                     </div>
 
                     <!-- User Menu / Login Button -->
                     <div class="relative user-menu">
                         <!-- Login Button (shown when not logged in) -->
-                        <a href="login.html" id="loginBtn" data-no-transition class="bg-coffee text-white px-3 py-2 sm:px-4 sm:py-2 rounded-full hover:bg-coffee-dark transition-colors text-sm inline-flex items-center">
+                        <a href="login.html" id="loginBtn" data-no-transition
+                            class="bg-coffee text-white px-3 py-2 sm:px-4 sm:py-2 rounded-full hover:bg-coffee-dark transition-colors text-sm inline-flex items-center">
                             <i class="fas fa-user mr-1 sm:mr-2"></i>
                             <span class="hidden sm:inline">Đăng nhập</span>
                         </a>
-                        
+
                         <!-- User Button (shown when logged in) -->
-                        <button onclick="toggleUserMenu()" id="userBtn" class="hidden bg-coffee text-white px-3 py-2 sm:px-4 sm:py-2 rounded-full hover:bg-coffee-dark transition-colors text-sm items-center">
+                        <button onclick="toggleUserMenu()" id="userBtn"
+                            class="hidden bg-coffee text-white px-3 py-2 sm:px-4 sm:py-2 rounded-full hover:bg-coffee-dark transition-colors text-sm items-center">
                             <i class="fas fa-user mr-1 sm:mr-2"></i>
                             <span id="userName">Tài khoản</span>
                             <i class="fas fa-chevron-down ml-2 text-xs"></i>
                         </button>
-                        
+
                         <!-- Dropdown Menu -->
-                        <div id="userDropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 z-50">
-                            <a href="profile.html" class="block px-4 py-2 text-gray-700 hover:bg-coffee hover:text-white transition-colors">
+                        <div id="userDropdown"
+                            class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 z-50">
+                            <a href="profile.html"
+                                class="block px-4 py-2 text-gray-700 hover:bg-coffee hover:text-white transition-colors">
                                 <i class="fas fa-user-circle mr-2"></i>Hồ sơ
                             </a>
-                            <a href="my-orders.html" class="block px-4 py-2 text-gray-700 hover:bg-coffee hover:text-white transition-colors">
+                            <a href="my-orders.html"
+                                class="block px-4 py-2 text-gray-700 hover:bg-coffee hover:text-white transition-colors">
                                 <i class="fas fa-shopping-bag mr-2"></i>Đơn hàng
                             </a>
-                            <a href="reservation-history.html" class="block px-4 py-2 text-gray-700 hover:bg-coffee hover:text-white transition-colors">
+                            <a href="reservation-history.html"
+                                class="block px-4 py-2 text-gray-700 hover:bg-coffee hover:text-white transition-colors">
                                 <i class="fas fa-history mr-2"></i>Lịch sử đặt bàn
                             </a>
                             <hr class="my-2">
-                            <a href="#" onclick="logout(); return false;" class="block px-4 py-2 text-red-600 hover:bg-red-50 transition-colors">
+                            <a href="#" onclick="logout(); return false;"
+                                class="block px-4 py-2 text-red-600 hover:bg-red-50 transition-colors">
                                 <i class="fas fa-sign-out-alt mr-2"></i>Đăng xuất
                             </a>
                         </div>
@@ -186,18 +205,20 @@
 
     <!-- Core utility scripts -->
     <script src="assets/js/utils.js"></script>
-    
+
     <!-- Core managers -->
     <script src="assets/js/cart-manager.js"></script>
     <script src="assets/js/auth-manager.js"></script>
     <script src="assets/js/navigation-manager.js"></script>
-    
+
     <!-- API and legacy compatibility -->
     <script src="assets/js/api.js"></script>
     <script src="assets/js/auth.js"></script>
-    
+
     <!-- Page-specific scripts -->
+    <script src="assets/js/settings-loader.js"></script>
     <script src="assets/js/detail.js"></script>
     <script src="assets/js/user-menu.js"></script>
 </body>
+
 </html>
